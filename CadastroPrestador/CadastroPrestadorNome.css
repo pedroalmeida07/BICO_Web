@@ -53,7 +53,8 @@
         .card-title {
             color: #1F2F45;
             font-size: 24px;
-            font-family: 'Roboto-Black', sans-serif ;
+            font-family: var(--font-roboto);
+            font-weight: bold;
             text-align: center;
             margin-bottom: 48px;
         }
@@ -71,6 +72,8 @@
             border-bottom: 1.5px solid #d1d5db;
             padding: 10px 0;
             font-size: 15px;
+            font-family: var(--font-inter);
+            font-weight: 500;
             color: #1F2F45;
             outline: none;
             background: transparent;
@@ -106,6 +109,8 @@
 
         /* Botão Avançar + Brilho */
         .btn-primary {
+            font-family: var(--font-inter);
+            font-weight: 600;
             background-color: #252e3e;
             color: #ffffff;
             box-shadow: 0 0 18px rgba(37, 46, 62, 0.45);
@@ -119,6 +124,8 @@
 
         /* Botão Voltar + Brilho */
         .btn-secondary {
+            font-family: var(--font-inter);
+            font-weight: 600;
             background-color: #E0E7FF;
             color: #252e3e;
             box-shadow: 0 0 18px rgba(180, 200, 255, 0.75);
