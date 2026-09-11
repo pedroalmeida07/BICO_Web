@@ -43,7 +43,8 @@
         .card {
             background: #ffffff;
             border-radius: 20px;
-            padding: 56px 44px; /* Espaçamento interno aumentado */
+            /*padding: 56px 44px*/
+            padding: 40px 44px; /* Espaçamento interno aumentado */
             width: 100%;
             max-width: 440px;   /* Aumentado de 380px para 440px mantendo a proporção vertical */
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.02);

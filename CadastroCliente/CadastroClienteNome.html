@@ -24,11 +24,25 @@
             </div>
 
             <div class="button-group">
-                <button type="button" class="btn btn-primary">Avançar</button>
-                <button type="button" class="btn btn-secondary">Voltar</button>
+                <button id="btnAvancar" type="button" class="btn btn-primary">Avançar</button>
+                <button id="btnVoltar" type="button" class="btn btn-secondary">Voltar</button>
             </div>
         </div>
     </div>
+
+    <script>
+        const avancar = document.getElementById("btnAvancar");
+        const voltar = document.getElementById("btnVoltar");
+        
+        avancar.addEventListener("click", function () {
+            try {
+                window.location.href = "CadastroClienteLocal.html";
+            } catch (erro) {
+                console.error("Erro ao tentar redirecionar:", erro);
+            }
+        });
+
+    </script>
 
 </body>
 </html>
