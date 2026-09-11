@@ -1,3 +1,5 @@
+@import url('../Fonts/Fonte.css');
+
 * {
             margin: 0;
             padding: 0;
@@ -51,7 +53,7 @@
         .card-title {
             color: #1F2F45;
             font-size: 24px;
-            font-weight: 700;
+            font-family: 'Roboto-Black', sans-serif ;
             text-align: center;
             margin-bottom: 48px;
         }
