@@ -19,8 +19,8 @@
             <h2 class="card-title">Nos diga seu nome</h2>
             
             <div class="input-group">
-                <input type="text" class="form-input" placeholder="Nome Completo">
-                <input type="text" class="form-input" placeholder="CPF">
+                <input id="nomeCompleto" type="text" class="form-input" placeholder="Nome Completo">
+                <input id="cpf" type="text" class="form-input" placeholder="CPF">
             </div>
 
             <div class="button-group">
@@ -31,17 +31,32 @@
     </div>
 
     <script>
+        // Botões
         const avancar = document.getElementById("btnAvancar");
         const voltar = document.getElementById("btnVoltar");
 
+        // Inputs
+        const nomeCompleto = document.getElementById("nomeCompleto");
+        const cpf = document.getElementById("cpf");
+
+        // Evento de Avançar com Validação
         avancar.addEventListener("click", function () {
-            try {
-                window.location.href = "CadastroPrestadorUsuario.html";
-            } catch (erro) {
-                console.error("Erro ao tentar redirecionar:", erro);
+            if (!nomeCompleto.value) {
+                alert("Insira seu nome completo!");
+            } else {
+                if (!cpf.value) {
+                    alert("Insira seu CPF!");
+                } else {
+                    try {
+                        window.location.href = "CadastroPrestadorUsuario.html";
+                    } catch (erro) {
+                        console.error("Erro ao tentar redirecionar:", erro);
+                    }
+                }
             }
         });
         
+        // Evento de Voltar
         voltar.addEventListener("click", function () {
             try {
                 window.location.href = "CadastroPrestadorNome.html";

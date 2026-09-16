@@ -19,7 +19,7 @@
             <h2 class="card-title">Crie um nome de usuário</h2>
             
             <div class="input-group">
-                <input type="text" class="form-input" placeholder="Nome de Usuário">
+                <input id="usuario" type="text" class="form-input" placeholder="Nome de Usuário">
             </div>
 
             <div class="button-group">
@@ -30,17 +30,27 @@
     </div>
 
     <script>
+        // Botões
         const avancar = document.getElementById("btnAvancar");
         const voltar = document.getElementById("btnVoltar");
 
+        // Inputs
+        const usuario = document.getElementById("usuario");
+
+        // Evento de Avançar com Validação
         avancar.addEventListener("click", function () {
-            try {
-                window.location.href = "CadastroPrestadorLocal.html";
-            } catch (erro) {
-                console.error("Erro ao tentar redirecionar:", erro);
+            if (!usuario.value) {
+                alert("Insira um nome de usuário!");
+            } else {
+                try {
+                    window.location.href = "CadastroPrestadorLocal.html";
+                } catch (erro) {
+                    console.error("Erro ao tentar redirecionar:", erro);
+                }
             }
         });
         
+        // Evento de Voltar
         voltar.addEventListener("click", function () {
             try {
                 window.location.href = "CadastroPrestadorNome.html";

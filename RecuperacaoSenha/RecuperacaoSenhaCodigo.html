@@ -19,7 +19,7 @@
             <h2 class="card-title">Insira o Código de <br>Recuperação</h2>
             
             <div class="input-group">
-                <input type="text" class="form-input" placeholder="Código de Verificação">
+                <input id="codigoVerificacao" type="text" class="form-input" placeholder="Código de Verificação">
             </div>
 
             <div class="button-group">
@@ -30,17 +30,27 @@
     </div>
 
     <script>
+        // Botões
         const avancar = document.getElementById("btnAvancar");
         const voltar = document.getElementById("btnVoltar");
 
+        // Inputs
+        const codigoVerificacao = document.getElementById("codigoVerificacao");
+
+        // Evento de Avançar com Validação
         avancar.addEventListener("click", function () {
-            try {
-                window.location.href = "RecuperacaoSenhaTrocar.html";
-            } catch (erro) {
-                console.error("Erro ao tentar redirecionar:", erro);
+            if (!codigoVerificacao.value) {
+                alert("Insira o código de verificação!");
+            } else {
+                try {
+                    window.location.href = "RecuperacaoSenhaTrocar.html";
+                } catch (erro) {
+                    console.error("Erro ao tentar redirecionar:", erro);
+                }
             }
         });
         
+        // Evento de Voltar
         voltar.addEventListener("click", function () {
             try {
                 window.location.href = "RecuperacaoSenhaEmail.html";
