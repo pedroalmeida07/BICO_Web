@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BICO - Cadastro</title>
-    <link rel="stylesheet" href="CadastroPrestador.css">
+    <link rel="stylesheet" href="RecuperacaoSenha.css">
 </head>
 <body>
 
@@ -16,14 +16,14 @@
 
         <!-- Lado Direito: Card do Formulário -->
         <div class="card">
-            <h2 class="card-title">Crie um nome de usuário</h2>
+            <h2 class="card-title">Recuperar Senha</h2>
             
             <div class="input-group">
-                <input type="text" class="form-input" placeholder="Nome de Usuário">
+                <input type="text" class="form-input" placeholder="E-mail">
             </div>
 
             <div class="button-group">
-                <button id="btnAvancar" type="button" class="btn btn-primary">Avançar</button>
+                <button id="btnAvancar" type="button" class="btn btn-primary">Enviar Código</button>
                 <button id="btnVoltar" type="button" class="btn btn-secondary">Voltar</button>
             </div>
         </div>
@@ -35,7 +35,7 @@
 
         avancar.addEventListener("click", function () {
             try {
-                window.location.href = "CadastroPrestadorLocal.html";
+                window.location.href = "RecuperacaoSenhaCodigo.html";
             } catch (erro) {
                 console.error("Erro ao tentar redirecionar:", erro);
             }
@@ -43,7 +43,7 @@
         
         voltar.addEventListener("click", function () {
             try {
-                window.location.href = "CadastroPrestadorNome.html";
+                window.location.href = "RecuperacaoSenhaEmail.html";
             } catch (erro) {
                 console.error("Erro ao tentar redirecionar:", erro);
             }
