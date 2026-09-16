@@ -42,6 +42,7 @@
     </div>
 
     <script>
+        
         //Botões
         const avancar = document.getElementById("btnAvancar");
         const voltar = document.getElementById("btnVoltar");
@@ -51,7 +52,7 @@
         const senha = document.getElementById("senha")
         const confSenha = document.getElementById("confSenha")
 
-        voltar.addEventListener("click", function () {
+        avancar.addEventListener("click", function () {
             if (!email.value){
                 alert("Insira um e-mail!")
             }else{
@@ -62,12 +63,20 @@
                         alert("As senhas não coincidem!")
                     }else{
                         try {
-                            window.location.href = "CadastroClienteLocal.html";
+                            window.location.href = "../Login/Login.html";
                         } catch (erro) {
                             console.error("Erro ao tentar redirecionar:", erro);
                         }                        
                     }
                 }
+            }
+        });
+
+        voltar.addEventListener("click", function () {
+            try {
+                window.location.href = "CadastroClienteLocal.html";
+            } catch (erro) {
+                console.error("Erro ao tentar redirecionar:", erro);
             }
         });
 

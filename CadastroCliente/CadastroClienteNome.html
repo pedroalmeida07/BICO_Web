@@ -29,8 +29,8 @@
                     <h2 class="card-title">Nos diga seu nome</h2>
                     
                     <div class="input-group-custom">
-                        <input type="text" class="form-input" placeholder="Nome Completo">
-                        <input type="text" class="form-input" placeholder="CPF">
+                        <input id="nomeCompleto" type="text" class="form-input" placeholder="Nome Completo">
+                        <input id="cpf" type="text" class="form-input" placeholder="CPF">
                     </div>
 
                     <div class="button-group-custom">
@@ -52,27 +52,30 @@
         const voltar = document.getElementById("btnVoltar");
 
         //Inputs
-        const email = document.getElementById("email")
-        const senha = document.getElementById("senha")
-        const confSenha = document.getElementById("confSenha")
+        const nomeCompleto = document.getElementById("nomeCompleto");
+        const cpf = document.getElementById("cpf");
 
         avancar.addEventListener("click", function () {
-            if (!email){
-                alert("Insira um e-mail!")
-            }else{
-                if(!senha){
-                    alert("Insira uma senha!")
-                }else{
-                    if(confSenha!=senha){
-                        alert("As senhas não coincidem!")
-                    }else{
-                        try {
-                            window.location.href = "CadastroClienteLocal.html";
-                        } catch (erro) {
-                            console.error("Erro ao tentar redirecionar:", erro);
-                        }                        
+            if (!nomeCompleto.value) {
+                alert("Insira seu nome completo!");
+            } else {
+                if (!cpf.value) {
+                    alert("Insira seu CPF!");
+                } else {
+                    try {
+                        window.location.href = "CadastroClienteLocal.html";
+                    } catch (erro) {
+                        console.error("Erro ao tentar redirecionar:", erro);
                     }
                 }
+            }
+        });
+
+        voltar.addEventListener("click", function () {
+            try {
+                window.location.href = "../Login/Login.html";
+            } catch (erro) {
+                console.error("Erro ao tentar redirecionar:", erro);
             }
         });
     </script>

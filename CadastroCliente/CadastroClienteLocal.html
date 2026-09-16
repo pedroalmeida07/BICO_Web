@@ -29,10 +29,10 @@
                     <h2 class="card-title">Onde você mora?</h2>
             
             <div class="input-group-custom">
-                <input type="text" class="form-input" placeholder="CEP">
-                <input type="text" class="form-input" placeholder="Telefone">
-                <input type="number" class="form-input" placeholder="Número">
-                <input type="text" class="form-input" placeholder="Complemento">
+                <input id="cep" type="text" class="form-input" placeholder="CEP">
+                <input id="telefone" type="text" class="form-input" placeholder="Telefone">
+                <input id="numero" type="number" class="form-input" placeholder="Número">
+                <input id="complemento" type="text" class="form-input" placeholder="Complemento (Opcional)">
             </div>
 
             <div class="button-group-custom">
@@ -43,17 +43,37 @@
     </div>
 
     <script>
+
+        //Botões
         const avancar = document.getElementById("btnAvancar");
         const voltar = document.getElementById("btnVoltar");
 
+        //Inputs
+        const cep = document.getElementById("cep");
+        const telefone = document.getElementById("telefone");
+        const numero = document.getElementById("numero");
+        const complemento = document.getElementById("complemento");
+
         avancar.addEventListener("click", function () {
-            try {
-                window.location.href = "CadastroClienteEmail.html";
-            } catch (erro) {
-                console.error("Erro ao tentar redirecionar:", erro);
+            if (!cep.value) {
+                alert("Insira um CEP!");
+            } else {
+                if (!telefone.value) {
+                    alert("Insira um telefone!");
+                } else {
+                    if (!numero.value) {
+                        alert("Insira o número da residência!");
+                    } else {
+                        try {
+                            window.location.href = "CadastroClienteEmail.html";
+                        } catch (erro) {
+                            console.error("Erro ao tentar redirecionar:", erro);
+                        }
+                    }
+                }
             }
         });
-        
+
         voltar.addEventListener("click", function () {
             try {
                 window.location.href = "CadastroClienteNome.html";
