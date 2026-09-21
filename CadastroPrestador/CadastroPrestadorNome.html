@@ -44,41 +44,7 @@
         </div>
     </main>
 
-    <script>
-        // Botões
-        const avancar = document.getElementById("btnAvancar");
-        const voltar = document.getElementById("btnVoltar");
-
-        // Inputs
-        const nomeCompleto = document.getElementById("nomeCompleto");
-        const cpf = document.getElementById("cpf");
-
-        // Evento de Avançar com Validação
-        avancar.addEventListener("click", function () {
-            if (!nomeCompleto.value) {
-                alert("Insira seu nome completo!");
-            } else {
-                if (!cpf.value) {
-                    alert("Insira seu CPF!");
-                } else {
-                    try {
-                        window.location.href = "CadastroPrestadorUsuario.html";
-                    } catch (erro) {
-                        console.error("Erro ao tentar redirecionar:", erro);
-                    }
-                }
-            }
-        });
-        
-        // Evento de Voltar
-        voltar.addEventListener("click", function () {
-            try {
-                window.location.href = "../Login/Login.html";
-            } catch (erro) {
-                console.error("Erro ao tentar redirecionar:", erro);
-            }
-        });
-    </script>
+    <script type="module" src="CadastroPrestadorNome.js"></script>
 
 </body>
 </html>

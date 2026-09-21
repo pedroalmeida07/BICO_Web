@@ -44,39 +44,7 @@
         </div>
     </main>
 
-    <script>
-        // Botões
-        const avancar = document.getElementById("btnAvancar");
-        const voltar = document.getElementById("btnVoltar");
-
-        // Inputs
-        const servico = document.getElementById("servico");
-        const local = document.getElementById("local");
-
-        avancar.addEventListener("click", function () {
-            if (!servico.value) {
-                alert("Insira o tipo de serviço!");
-            } else {
-                if (!local.value) {
-                    alert("Insira o local de atuação!");
-                } else {
-                    try {
-                        window.location.href = "CadastroPrestadorEmail.html"; // Redireciona para a próxima etapa
-                    } catch (erro) {
-                        console.error("Erro ao tentar redirecionar:", erro);
-                    }
-                }
-            }
-        });
-
-        voltar.addEventListener("click", function () {
-            try {
-                window.location.href = "CadastroPrestadorUsuario.html"; // Redireciona para a etapa anterior
-            } catch (erro) {
-                console.error("Erro ao tentar redirecionar:", erro);
-            }
-        });
-    </script>
+    <script type="module" src="CadastroPrestadorLocal.js"></script>
 
 </body>
 </html>

@@ -43,36 +43,7 @@
         </div>
     </main>
 
-    <script>
-        // Botões
-        const avancar = document.getElementById("btnAvancar");
-        const voltar = document.getElementById("btnVoltar");
-
-        // Inputs
-        const usuario = document.getElementById("usuario");
-
-        // Evento de Avançar com Validação
-        avancar.addEventListener("click", function () {
-            if (!usuario.value) {
-                alert("Insira um nome de usuário!");
-            } else {
-                try {
-                    window.location.href = "CadastroPrestadorLocal.html";
-                } catch (erro) {
-                    console.error("Erro ao tentar redirecionar:", erro);
-                }
-            }
-        });
-        
-        // Evento de Voltar
-        voltar.addEventListener("click", function () {
-            try {
-                window.location.href = "CadastroPrestadorNome.html";
-            } catch (erro) {
-                console.error("Erro ao tentar redirecionar:", erro);
-            }
-        });
-    </script>
+    <script type="module" src="CadastroPrestadorUsuario.js"></script>
 
 </body>
 </html>

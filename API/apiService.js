@@ -1,4 +1,4 @@
-const BASE_URL = 'https://archlinux.tailed4748.ts.net/'; // Substitua pela URL da sua API
+const BASE_URL = 'https://archlinux.tailed4748.ts.net/';
 
 export const api = {
   criarPrestador: async (dadosPrestador) => {
