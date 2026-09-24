@@ -1,0 +1,290 @@
+@import url('../Fonts/Fonte.css');
+
+/* RESET BÁSICO */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: #f6f7f9;
+  color: #1e293b;
+  min-height: 100vh;
+}
+
+/* --- CABEÇALHO / HEADER --- */
+.header {
+  background-color: #202b3d;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 40px;
+  color: #ffffff;
+}
+
+.header-logo .img-logo {
+  height: 48px; /* Ajuste a altura do seu logo conforme necessário */
+  object-fit: contain;
+}
+
+/* CARDS NO CABEÇALHO */
+.header-stats {
+  display: flex;
+  gap: 15px;
+}
+
+.stat-card {
+  background-color: #ffffff;
+  padding: 8px 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 110px;
+}
+
+.stat-number {
+  color: #f39a36;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.stat-label {
+  color: #202b3d;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* LINKS DO HEADER */
+.header-nav {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-link.active {
+  color: #f39a36;
+}
+
+.nav-link:hover {
+  color: #f39a36;
+}
+
+/* PERFIL */
+.header-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.profile-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-name {
+  font-size: 0.85rem;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* --- ESTRUTURA PRINCIPAL (SIDEBAR + CONTEÚDO) --- */
+.main-layout {
+  display: flex;
+  min-height: calc(100vh - 84px);
+}
+
+/* BARRA LATERAL DE VETORES/ÍCONES */
+.sidebar {
+  width: 80px;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+.sidebar-icon {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+
+.sidebar-icon img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.sidebar-icon:hover {
+  transform: scale(1.1);
+}
+
+/* AREA DE CONTEÚDO */
+.content-area {
+  flex: 1;
+  padding: 40px 50px;
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 20px;
+}
+
+/* GRIDS E CARDS DE SERVIÇOS */
+.cards-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.service-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+  flex: 1;
+  min-width: 360px;
+  max-width: 480px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid #e2e8f0;
+}
+
+.client-avatar {
+  width: 85px;
+  height: 85px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.service-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.service-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.client-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.service-time {
+  color: #f39a36;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.inline-icon {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.service-type {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.service-footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.service-location {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-concluir {
+  background-color: #fde8d0;
+  color: #f39a36;
+  border: none;
+  padding: 4px 14px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-concluir:hover {
+  opacity: 0.85;
+}
+
+/* AÇÕES RÁPIDAS */
+.quick-actions-grid {
+  display: flex;
+  gap: 20px;
+}
+
+.action-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px 30px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  width: fit-content;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.action-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.action-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.action-text {
+  font-weight: 700;
+  color: #1e293b;
+  font-size: 1rem;
+}

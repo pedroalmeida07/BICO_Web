@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BICO - Painel do Prestador</title>
+
+    <!-- Links de bootstrap e css-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="Prestador.css">
+
+</head>
+<body>
+
+  <!-- CABEÇALHO / HEADER -->
+  <header class="header">
+    <div class="header-logo">
+      <!-- COLOQUE AQUI A IMAGEM DO LOGO (TUCANO + NOME BICO) -->
+      <img src="../Icones/bico_tucan.png" alt="Logo BICO" class="img-logo">
+      <img src="../Icones/bico_logo.png" alt="Logo BICO" class="img-logo">
+    </div>
+
+    <!-- CARDS DE ESTATÍSTICAS NO CABEÇALHO -->
+    <div class="header-stats">
+      <div class="stat-card">
+        <span class="stat-number">5</span>
+        <span class="stat-label">Pendentes</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">4,7</span>
+        <span class="stat-label">Avaliação</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">367</span>
+        <span class="stat-label">Concluídos</span>
+      </div>
+    </div>
+
+    <!-- MENU DE NAVEGAÇÃO -->
+    <nav class="header-nav">
+      <a href="#" class="nav-link active">Início</a>
+      <a href="#" class="nav-link">Mensagens</a>
+      <a href="#" class="nav-link">Planos</a>
+    </nav>
+
+    <!-- PERFIL DO USUÁRIO -->
+    <div class="header-profile">
+      <!-- COLOQUE AQUI A FOTO DE PERFIL DO WELINGTON -->
+      <img src="../Icones/Wellington_Matos.jpeg" alt="Welington Matos" class="profile-avatar">
+      <span class="profile-name">Welington Matos</span>
+    </div>
+  </header>
+
+  <!-- CORPO PRINCIPAL DA PÁGINA -->
+  <div class="main-layout">
+
+    <!-- BARRA LATERAL COM ÍCONES/VETORES -->
+    <aside class="sidebar">
+      <a href="#" class="sidebar-icon active" title="Página Inicial">
+        <!-- COLOQUE AQUI O ÍCONE DE HOME/CASA -->
+        <img src="caminho/para/icone-home.png" alt="Página Inicial">
+      </a>
+      <a href="#" class="sidebar-icon" title="Privacidade">
+        <!-- COLOQUE AQUI O ÍCONE DE CADEADO/PRIVACIDADE -->
+        <img src="caminho/para/icone-cadeado.png" alt="Privacidade">
+      </a>
+      <a href="#" class="sidebar-icon" title="Editar Perfil">
+        <!-- COLOQUE AQUI O ÍCONE DE USUÁRIO/PERFIL -->
+        <img src="caminho/para/icone-perfil.png" alt="Editar Perfil">
+      </a>
+      <a href="#" class="sidebar-icon" title="Ajuda">
+        <!-- COLOQUE AQUI O ÍCONE DE AJUDA (?) -->
+        <img src="caminho/para/icone-ajuda.png" alt="Ajuda">
+      </a>
+    </aside>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="content-area">
+
+      <!-- SEÇÃO: PRÓXIMOS SERVIÇOS -->
+      <section class="section">
+        <h2 class="section-title">Próximos Serviços</h2>
+
+        <div class="cards-grid">
+          
+          <!-- CARD DE SERVIÇO 1 -->
+          <div class="service-card">
+            <!-- COLOQUE AQUI A FOTO DO CLIENTE 1 -->
+            <img src="caminho/para/foto-ednaldo.jpg" alt="Ednaldo Pereira" class="client-avatar">
+            
+            <div class="service-info">
+              <div class="service-header-row">
+                <h3 class="client-name">Ednaldo Pereira</h3>
+                <span class="service-time">
+                  <!-- COLOQUE AQUI O ÍCONE DE RELÓGIO (OPCIONAL) OU MANTENHA SÓ O TEXTO/ÍCONE -->
+                  <img src="caminho/para/icone-relogio.png" alt="Horário" class="inline-icon">
+                  06/07, 06:07
+                </span>
+              </div>
+              
+              <p class="service-type">Reparo de disjuntor</p>
+              
+              <div class="service-footer-row">
+                <span class="service-location">
+                  <!-- COLOQUE AQUI O ÍCONE DE LOCALIZAÇÃO (PIN) -->
+                  <img src="caminho/para/icone-pin.png" alt="Local" class="inline-icon">
+                  José de Anchieta - Serra
+                </span>
+                <button class="btn-concluir">Concluir</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD DE SERVIÇO 2 -->
+          <div class="service-card">
+            <!-- COLOQUE AQUI A FOTO DA CLIENTE 2 -->
+            <img src="caminho/para/foto-vania.jpg" alt="Vânia Silva" class="client-avatar">
+            
+            <div class="service-info">
+              <div class="service-header-row">
+                <h3 class="client-name">Vânia Silva</h3>
+                <span class="service-time">
+                  <!-- COLOQUE AQUI O ÍCONE DE RELÓGIO -->
+                  <img src="caminho/para/icone-relogio.png" alt="Horário" class="inline-icon">
+                  12/07, 12:00
+                </span>
+              </div>
+              
+              <p class="service-type">Instalação de placas solares</p>
+              
+              <div class="service-footer-row">
+                <span class="service-location">
+                  <!-- COLOQUE AQUI O ÍCONE DE LOCALIZAÇÃO (PIN) -->
+                  <img src="caminho/para/icone-pin.png" alt="Local" class="inline-icon">
+                  Morada de Laranjeiras - Serra
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SEÇÃO: AÇÕES RÁPIDAS -->
+      <section class="section">
+        <h2 class="section-title">Ações Rápidas</h2>
+
+        <div class="quick-actions-grid">
+          <div class="action-card">
+            <!-- COLOQUE AQUI O ÍCONE DE AGENDA/CALENDÁRIO -->
+            <img src="caminho/para/icone-agenda.png" alt="Agenda" class="action-icon">
+            <span class="action-text">Agenda</span>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+</body>
+</html>
