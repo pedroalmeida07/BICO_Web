@@ -2,7 +2,7 @@ const BASE_URL = 'https://archlinux.tailed4748.ts.net';
 
 export const api = {
   criarPrestador: async (dadosPrestador) => {
-    const response = await fetch(`${BASE_URL}/prestador`, {
+    const response = await fetch(`${BASE_URL}/prestadores`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
