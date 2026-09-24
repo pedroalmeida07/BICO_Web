@@ -4,25 +4,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - BICO</title>
-
-    <!-- Links de bootstrap e css-->
+    <title>Login</title>
+    <!-- Bootstrap 5 CSS via CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS Customizado -->
     <link rel="stylesheet" href="Login.css">
 </head>
 
-<body>
-    <!-- Barra azul superior -->
-    <nav class="navbar w-100" style="background-color: #1f2c3e;">
-        <div class="container-fluid d-flex align-items-center" style="padding-left: 5%;">
-            
-            <div class="d-flex align-items-center">
-                <img style="height: 60px; width: auto;" src="../Icones/Icone_BICO_fundo_branco.png" alt="Logo BICO">
-                <img style="height: 60px; width: auto; margin-left: 10px;" src="../Icones/Nome_BICO.png" alt="Nome BICO">
-            </div>
+<body class="d-flex flex-column vh-100">
 
+    <!-- Header -->
+    <header class="header-custom d-flex align-items-center px-4">
+        <div class="d-flex align-items-center gap-2">
+            <img src="../Icones/Icone_BICO_fundo_branco.png" alt="Tucano BICO" class="logo-tucano-header">
+            <img src="../Icones/Nome_BICO.png" alt="Texto BICO" class="logo-texto-header">
         </div>
-    </nav>
+    </header>
 
+    <!-- Main Content -->
+    <main class="flex-grow-1 d-flex overflow-hidden">
+        <div class="container-fluid p-0 h-100">
+            <div class="row g-0 h-100">
+
+                <!-- Lado Esquerdo: Imagem e Texto -->
+                <div class="col-12 col-md-6 hero-section d-flex align-items-center justify-content-center p-4">
+                    <h1 class="hero-text text-center text-white fw-bold">
+                        Encontre profissionais<br>qualificados ou ofereça<br>seus serviços
+                    </h1>
+                </div>
+
+                <!-- Lado Direito: Formulário de Login -->
+                <div class="col-12 col-md-6 d-flex align-items-center justify-content-center form-section bg-white p-4">
+                    <div class="card card-login border rounded-3 p-4 p-md-5">
+                        <h2 class="text-center h5 fw-bold mb-4 titulo-login">BICO - Acesso</h2>
+
+                        <form id="formLogin">
+
+                            <!-- E-mail -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label form-label-custom">E-mail</label>
+                                <input type="email" class="form-control form-control-custom shadow-none" id="email"
+                                    required>
+                            </div>
+
+                            <!-- Senha -->
+                            <div class="mb-4">
+                                <label for="senha" class="form-label form-label-custom">Senha</label>
+                                <div class="input-group">
+                                    <input type="password"
+                                        class="form-control form-control-custom border-end-0 shadow-none" id="senha"
+                                        required>
+                                    <span class="input-group-text bg-white border-start-0 custom-eye-toggle"
+                                        id="togglePassword" style="cursor: pointer;">
+                                        <!-- Ícone SVG de Olho Fechado -->
+                                        <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="#6c757d" class="bi bi-eye-slash" viewBox="0 0 16 16">
+                                            <path
+                                                d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z" />
+                                            <path
+                                                d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z" />
+                                            <path
+                                                d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z" />
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Botão Entrar -->
+                            <button type="submit" class="btn btn-entrar w-100 mb-2">Entrar</button>
+
+                            <!-- Links Auxiliares -->
+                            <div class="d-flex justify-content-between mb-4 mt-2">
+                                <a href="#" class="form-link text-decoration-none">Cadastre-se</a>
+                                <a href="#" class="form-link text-decoration-none">Esqueci minha senha</a>
+                            </div>
+
+                            <!-- Botão Cadastrar Prestador -->
+                            <button type="button" class="btn btn-prestador w-100">Cadastrar como prestador</button>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap 5 JS Bundle via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script Customizado Integrado -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const togglePassword = document.querySelector("#togglePassword");
+            const passwordInput = document.querySelector("#senha");
+            const eyeIcon = document.querySelector("#eyeIcon");
+
+            togglePassword.addEventListener("click", function () {
+                // Alterna o tipo do input entre 'password' e 'text'
+                const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+                passwordInput.setAttribute("type", type);
+
+                // Alterna o ícone SVG entre olho fechado e aberto
+                if (type === "password") {
+                    eyeIcon.innerHTML = `
+                        <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+                        <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+                        <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+                    `;
+                } else {
+                    eyeIcon.innerHTML = `
+                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                    `;
+                }
+            });
+        });
+    </script>
 </body>
+
 </html>
