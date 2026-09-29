@@ -1,54 +1,127 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BICO - Home</title>
+    <title>BICO - Início do Cliente</title>
 
-    <!-- Links de bootstrap e css-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--Links para os ícones do Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="Cliente.css">
 </head>
 <body>
-        <!-- CABEÇALHO / HEADER -->
+    <!-- Barra superior da página-->
     <header class="header">
-        <div class="header-logo">
-            <img src="../Icones/bico_tucan.png" alt="Logo BICO" class="img-logo">
-            <img src="../Icones/bico_logo.png" alt="Logo BICO" class="img-logo">
-        </div>
-        
-        <!-- MENU DE NAVEGAÇÃO -->
-        <nav class="header-nav">
-            <a href="#" class="nav-link active">Início</a>
-            <a href="#" class="nav-link">Mensagens</a>
-            <a href="#" class="nav-link">Configurações</a>
+        <a class="header-logo" href="#inicio" aria-label="BICO - início">
+            <img src="../Icones/bico_tucan.png" alt="" class="logo-tucano">
+            <img src="../Icones/bico_logo.png" alt="BICO" class="logo-nome">
+        </a>
+
+        <form class="search-form" role="search">
+            <label class="visually-hidden" for="service-search">Pesquisar um serviço ou prestador</label>
+            <input id="service-search" type="search" placeholder="Pesquisar um serviço ou prestador">
+            <button type="submit" aria-label="Pesquisar"><i class="bi bi-search" aria-hidden="true"></i></button>
+        </form>
+
+        <nav class="header-nav" aria-label="Navegação principal">
+            <a href="#inicio" class="nav-link active">Início</a>
+            <a href="#mensagens" class="nav-link">Mensagens</a>
+            <a href="#configuracoes" class="nav-link">Configurações</a>
         </nav>
 
-        <!-- PERFIL DO USUÁRIO -->
-        <div class="header-profile">
-            <img src="../Icones/Wellington_Matos.jpeg" alt="Welington Matos" class="profile-avatar">
+        <a class="header-profile" href="#perfil">
+            <img src="../Icones/Wellington_Matos.jpeg" alt="" class="profile-avatar">
             <span class="profile-name">Kleber Nunes</span>
-        </div>
+        </a>
     </header>
 
-  <!-- CORPO PRINCIPAL DA PÁGINA -->
-    <div class="main-layout">
-
-        <!-- BARRA LATERAL COM ÍCONES/VETORES -->
-        <aside class="sidebar">
-        <a href="#" class="sidebar-icon active" title="Página Inicial">
-            <img src="caminho/para/icone-home.png" alt="Página Inicial">
-        </a>
-        <a href="#" class="sidebar-icon" title="Privacidade">
-            <img src="caminho/para/icone-cadeado.png" alt="Privacidade">
-        </a>
-        <a href="#" class="sidebar-icon" title="Editar Perfil">
-            <img src="caminho/para/icone-perfil.png" alt="Editar Perfil">
-        </a>
-        <a href="#" class="sidebar-icon" title="Ajuda">
-            <img src="caminho/para/icone-ajuda.png" alt="Ajuda">
-        </a>
+    <div class="main-layout" id="inicio">
+        <aside class="sidebar" aria-label="Atalhos">
+            <a href="#inicio" class="sidebar-icon active" title="Página inicial" aria-label="Página inicial"><img src="caminho/para/icone-home.png" alt="Página Inicial"></a>
+            <a href="#privacidade" class="sidebar-icon" title="Privacidade" aria-label="Privacidade"><img src="caminho/para/icone-cadeado.png" alt="Privacidade"></a>
+            <a href="#perfil" class="sidebar-icon" title="Editar perfil" aria-label="Editar perfil"><img src="caminho/para/icone-perfil.png" alt="Editar Perfil"></a>
+            <a href="#favoritos" class="sidebar-icon" title="Favoritos" aria-label="Favoritos"><img src="caminho/para/icone-favoritos.png" alt="Favoritos"></a>
+            <a href="#ajuda" class="sidebar-icon" title="Ajuda" aria-label="Ajuda"><img src="caminho/para/icone-ajuda.png" alt="Ajuda"></a>
         </aside>
+
+        <main class="content-area">
+            <!-- Sessão de Melhor Avaliados -->
+            <section class="section" aria-labelledby="rated-title">
+                <h1 class="section-title" id="rated-title">Melhor Avaliados</h1>
+                <div class="cards-grid">
+                    <article class="provider-card">
+                        <img src="../Icones/Wellington_Matos.jpeg" alt="Serjio Krüger" class="provider-avatar">
+                        <div class="provider-info">
+                            <h2 class="provider-name">Serjio Krüger - Encanador</h2>
+                            <p class="rating"><span aria-label="5 de 5 estrelas">★★★★★</span> (41)</p>
+                            <p class="provider-description">Sou o melhor encanador da região, meu lema é que nunca irei te deixar na mão.</p>
+                            <a class="provider-phone" href="tel:+5527940808922">(27) 94082-8922</a>
+                            <p class="provider-location"><img src="caminho/para/icone-pin.png" alt="Local"> Serra - ES</p>
+                        </div>
+                        <button class="message-button" type="button">Enviar Mensagem</button>
+                    </article>
+
+                    <article class="provider-card">
+                        <img src="../Icones/Wellington_Matos.jpeg" alt="Ana Lyrio" class="provider-avatar">
+                        <div class="provider-info">
+                            <h2 class="provider-name">Ana Lyrio - Faxineira</h2>
+                            <p class="rating"><span aria-label="5 de 5 estrelas">★★★★★</span> (68)</p>
+                            <p class="provider-description">Não é delírio, a melhor faxina é com Ana Lyrio!</p>
+                            <a class="provider-phone" href="tel:+5527991989877">(27) 99918-9877</a>
+                            <p class="provider-location"><img src="caminho/para/icone-pin.png" alt="Local"> Cariacica - ES</p>
+                        </div>
+                        <button class="message-button" type="button">Enviar Mensagem</button>
+                    </article>
+
+                    <article class="provider-card">
+                        <img src="../Icones/Wellington_Matos.jpeg" alt="Hugo Neves" class="provider-avatar">
+                        <div class="provider-info">
+                            <h2 class="provider-name">Hugo Neves - Pedreiro</h2>
+                            <p class="rating"><span aria-label="5 de 5 estrelas">★★★★★</span> (77)</p>
+                            <p class="provider-description">Pedreiro com experiência em construção, reformas e acabamentos residenciais.</p>
+                            <a class="provider-phone" href="tel:+5527998473612">(27) 99847-3612</a>
+                            <p class="provider-location"><img src="caminho/para/icone-pin.png" alt="Local"> Serra - ES</p>
+                        </div>
+                        <button class="message-button" type="button">Enviar Mensagem</button>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Sessão de favoritos -->
+            <section class="section favorites-section" id="favoritos" aria-labelledby="favorites-title">
+                <div class="section-heading">
+                    <h2 class="section-title" id="favorites-title">Favoritos</h2>
+                    <a class="view-all" href="#todos-favoritos">Ver Todos</a>
+                </div>
+                <div class="cards-grid">
+                    <article class="provider-card favorite-card">
+                        <img src="../Icones/Wellington_Matos.jpeg" alt="Welington Matos" class="provider-avatar">
+                        <div class="provider-info">
+                            <h3 class="provider-name">Welington Matos - Eletricista</h3>
+                            <p class="rating"><span aria-label="5 de 5 estrelas">★★★★★</span> (67)</p>
+                            <p class="provider-description">Sou Welington Matos, eletricista com experiência em instalações e manutenções elétricas.</p>
+                            <a class="provider-phone" href="tel:+5527967222267">(27) 96722-2267</a>
+                            <p class="provider-location"><img src="caminho/para/icone-pin.png" alt="Local"> Serra - ES</p>
+                        </div>
+                        <button class="favorite-toggle" type="button" aria-label="Remover Welington dos favoritos" aria-pressed="true"><i class="bi bi-star-fill" aria-hidden="true"></i></button>
+                        <button class="message-button" type="button">Enviar Mensagem</button>
+                    </article>
+
+                    <article class="provider-card favorite-card">
+                        <img src="../Icones/Wellington_Matos.jpeg" alt="Takamasa Nomuro" class="provider-avatar">
+                        <div class="provider-info">
+                            <h3 class="provider-name">Takamasa Nomuro - Ajudante</h3>
+                            <p class="rating"><span aria-label="5 de 5 estrelas">★★★★★</span> (112)</p>
+                            <p class="provider-description">Ajudante de pedreiro dedicado, oferecendo serviços com responsabilidade e pontualidade.</p>
+                            <a class="provider-phone" href="tel:+5527996128043">(27) 99612-8043</a>
+                            <p class="provider-location"><img src="caminho/para/icone-pin.png" alt="Local"> Vitória - ES</p>
+                        </div>
+                        <button class="favorite-toggle" type="button" aria-label="Remover Takamasa dos favoritos" aria-pressed="true"><i class="bi bi-star-fill" aria-hidden="true"></i></button>
+                        <button class="message-button" type="button">Enviar Mensagem</button>
+                    </article>
+                </div>
+            </section>
+        </main>
     </div>
 </body>
 </html>
