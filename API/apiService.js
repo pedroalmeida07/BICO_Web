@@ -1,6 +1,28 @@
 const BASE_URL = 'https://archlinux.tailed4748.ts.net';
 
+const buscarPerfil = async (tipo, token) => {
+  const response = await fetch(`${BASE_URL}/${tipo}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/json',
+    },
+  });
+
+  const dados = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    const erro = new Error(dados.message || `Não foi possível consultar o perfil ${tipo}.`);
+    erro.status = response.status;
+    throw erro;
+  }
+
+  return dados;
+};
+
 export const api = {
+  buscarCliente: (token) => buscarPerfil('clientes', token),
+  buscarPrestador: (token) => buscarPerfil('prestadores', token),
+
   criarPrestador: async (dadosPrestador) => {
     const response = await fetch(`${BASE_URL}/prestadores`, {
       method: 'POST',

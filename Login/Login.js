@@ -1,11 +1,133 @@
 
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+import { api } from "../API/apiService.js";
+import { auth } from "../API/firebase.js";
+
+const mostrarMensagem = (mensagem, tipo = "erro") => {
+    const mensagemElement = document.querySelector("#loginMensagem");
+    mensagemElement.textContent = mensagem;
+    mensagemElement.classList.toggle("text-danger", tipo === "erro");
+    mensagemElement.classList.toggle("text-success", tipo === "sucesso");
+    mensagemElement.hidden = false;
+};
+
+const perfilContemEmail = (dados, email) => {
+    if (Array.isArray(dados)) {
+        return dados.some((item) => perfilContemEmail(item, email));
+    }
+
+    if (!dados || typeof dados !== "object") {
+        return false;
+    }
+
+    return Object.entries(dados).some(([chave, valor]) => {
+        if (chave.toLowerCase() === "email" && typeof valor === "string") {
+            return valor.trim().toLowerCase() === email.trim().toLowerCase();
+        }
+
+        return perfilContemEmail(valor, email);
+    });
+};
+
+const buscarTipoConta = async (token, email) => {
+    const resultados = await Promise.allSettled([
+        api.buscarCliente(token),
+        api.buscarPrestador(token),
+    ]);
+    const perfis = resultados.flatMap((resultado, indice) => {
+        if (resultado.status !== "fulfilled") {
+            return [];
+        }
+
+        return [{
+            tipo: indice === 0 ? "cliente" : "prestador",
+            dados: resultado.value,
+        }];
+    });
+
+    if (perfis.length === 0) {
+        const erros = resultados
+            .filter((resultado) => resultado.status === "rejected")
+            .map((resultado) => resultado.reason);
+
+        if (erros.some((erro) => erro.status === 401)) {
+            throw new Error("O Firebase autenticou, mas a API recusou o token. Verifique se o servidor valida tokens do mesmo projeto Firebase.");
+        }
+
+        if (erros.some((erro) => erro.status === 403)) {
+            throw new Error("O Firebase autenticou, mas a API não permitiu consultar o perfil desta conta.");
+        }
+
+        throw new Error("O Firebase autenticou, mas não foi possível consultar o perfil na API.");
+    }
+
+    if (perfis.length === 1) {
+        return perfis[0].tipo;
+    }
+
+    const perfisCorrespondentes = perfis.filter((perfil) => perfilContemEmail(perfil.dados, email));
+    if (perfisCorrespondentes.length === 1) {
+        return perfisCorrespondentes[0].tipo;
+    }
+
+    throw new Error("A API retornou mais de um perfil e não foi possível identificar o tipo desta conta pelo e-mail.");
+};
+
+const autenticarUsuario = async (email, senha) => {
+    const credencial = await signInWithEmailAndPassword(auth, email, senha);
+    const usuario = credencial.user;
+    const token = await usuario.getIdToken();
+    const tipoConta = await buscarTipoConta(token, usuario.email || email);
+
+    sessionStorage.setItem("tipoConta", tipoConta);
+    sessionStorage.setItem("usuario", JSON.stringify({ uid: usuario.uid, email: usuario.email }));
+
+    window.location.href = tipoConta === "prestador"
+        ? "../Prestador/PrestadorHome.html"
+        : "../Cliente/ClienteHome.html";
+};
+
+const formLogin = document.querySelector("#formLogin");
+const btnCadCliente = document.querySelector("#btnCadCliente");
+const btnCadPrestador = document.querySelector("#btnCadPrestador");
+
 btnCadCliente.addEventListener("click", function () {
-    window.location.href = "../CadastroCliente/CadastroClienteNome.html"; // Redireciona para a página de cadastro
+    window.location.href = "../CadastroCliente/CadastroClienteNome.html";
 });
 
-
 btnCadPrestador.addEventListener("click", function () {
-    window.location.href = "../CadastroPrestador/CadastroPrestadorNome.html"; // Redireciona para a página de cadastro de prestador
+    window.location.href = "../CadastroPrestador/CadastroPrestadorNome.html";
+});
+
+formLogin.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const email = document.querySelector("#email").value.trim();
+    const senha = document.querySelector("#senha").value;
+
+    if (!email || !senha) {
+        mostrarMensagem("Informe o e-mail e a senha.");
+        return;
+    }
+
+    const botaoEntrar = formLogin.querySelector("button[type='submit']");
+    botaoEntrar.disabled = true;
+    botaoEntrar.textContent = "Entrando...";
+    mostrarMensagem("", "sucesso");
+
+    try {
+        await autenticarUsuario(email, senha);
+    } catch (erro) {
+        const mensagensFirebase = {
+            "auth/invalid-credential": "E-mail ou senha inválidos.",
+            "auth/invalid-email": "O formato do e-mail é inválido.",
+            "auth/too-many-requests": "Muitas tentativas. Aguarde um pouco e tente novamente.",
+            "auth/network-request-failed": "Não foi possível conectar ao Firebase. Verifique sua conexão.",
+        };
+        mostrarMensagem(mensagensFirebase[erro.code] || erro.message || "Não foi possível realizar o login.");
+        botaoEntrar.disabled = false;
+        botaoEntrar.textContent = "Entrar";
+    }
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -14,11 +136,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const eyeIcon = document.querySelector("#eyeIcon");
 
     togglePassword.addEventListener("click", function () {
-        // Alterna o tipo do input entre 'password' e 'text'
         const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
         passwordInput.setAttribute("type", type);
 
-        // Alterna o ícone SVG entre olho fechado e aberto
         if (type === "password") {
             eyeIcon.innerHTML = `
                 <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
