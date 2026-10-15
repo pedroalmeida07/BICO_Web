@@ -59,6 +59,13 @@ btnAvancar.addEventListener("click", async function () {
     const resultado = await api.criarPrestador(payloadPrestador);
     console.log("Prestador cadastrado com sucesso:", resultado);
 
+    const usuarios = JSON.parse(localStorage.getItem("usuariosBico") || "{}");
+    usuarios[email.value.trim().toLowerCase()] = {
+      tipo: "prestador",
+      senha: senha.value
+    };
+    localStorage.setItem("usuariosBico", JSON.stringify(usuarios));
+
     // 5. Limpa os dados temporários e redireciona para o login
     sessionStorage.removeItem("dadosCadastroPrestador");
     window.location.href = "../Login/Login.html";
