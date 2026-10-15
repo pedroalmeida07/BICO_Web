@@ -1,4 +1,4 @@
-const BASE_URL = 'https://archlinux.tailed4748.ts.net';
+const BASE_URL = 'https://archlinux.tailee8728.ts.net/';
 
 const buscarPerfil = async (tipo, token) => {
   const response = await fetch(`${BASE_URL}/${tipo}`, {
