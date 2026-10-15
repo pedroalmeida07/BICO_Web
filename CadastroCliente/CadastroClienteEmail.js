@@ -54,18 +54,23 @@ btnAvancar.addEventListener("click", async function () {
     btnAvancar.disabled = true;
     btnAvancar.textContent = "Cadastrando...";
 
-    // 4. Envia para o banco de dados via API
     const resultado = await api.criarCliente(payloadCliente);
     console.log("Cliente cadastrado com sucesso:", resultado);
 
+    const emailNormalizado = email.value.trim().toLowerCase();
     const usuarios = JSON.parse(localStorage.getItem("usuariosBico") || "{}");
-    usuarios[email.value.trim().toLowerCase()] = {
+
+    usuarios[emailNormalizado] = {
       tipo: "cliente",
       senha: senha.value
     };
-    localStorage.setItem("usuariosBico", JSON.stringify(usuarios));
 
-    // 5. Limpa os dados temporários e redireciona para o login
+    localStorage.setItem("usuariosBico", JSON.stringify(usuarios));
+    localStorage.setItem("usuarioLogado", JSON.stringify({
+      email: emailNormalizado,
+      tipo: "cliente"
+    }));
+
     sessionStorage.removeItem("dadosCadastroCliente");
     window.location.href = "../Login/Login.html";
 

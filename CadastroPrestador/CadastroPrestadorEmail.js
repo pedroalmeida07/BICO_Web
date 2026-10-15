@@ -55,23 +55,28 @@ btnAvancar.addEventListener("click", async function () {
     btnAvancar.disabled = true;
     btnAvancar.textContent = "Cadastrando...";
 
-    // 4. Envia para o banco de dados via API
     const resultado = await api.criarPrestador(payloadPrestador);
     console.log("Prestador cadastrado com sucesso:", resultado);
 
+    const emailNormalizado = email.value.trim().toLowerCase();
     const usuarios = JSON.parse(localStorage.getItem("usuariosBico") || "{}");
-    usuarios[email.value.trim().toLowerCase()] = {
+
+    usuarios[emailNormalizado] = {
       tipo: "prestador",
       senha: senha.value
     };
-    localStorage.setItem("usuariosBico", JSON.stringify(usuarios));
 
-    // 5. Limpa os dados temporários e redireciona para o login
+    localStorage.setItem("usuariosBico", JSON.stringify(usuarios));
+    localStorage.setItem("usuarioLogado", JSON.stringify({
+      email: emailNormalizado,
+      tipo: "prestador"
+    }));
+
     sessionStorage.removeItem("dadosCadastroPrestador");
     window.location.href = "../Login/Login.html";
 
   } catch (erro) {
-    mostrarErro(erro.message);
+    mostrarErro(erro.message || "Erro ao realizar o cadastro do prestador.");
     btnAvancar.disabled = false;
     btnAvancar.textContent = "Avançar";
   }

@@ -72,16 +72,15 @@
 
                             <!-- Botão Entrar -->
                             <button type="submit" class="btn btn-entrar w-100 mb-2">Entrar</button>
-                            <div id="loginMensagem" class="small text-danger" role="alert" hidden></div>
 
                             <!-- Links Auxiliares -->
                             <div class="d-flex justify-content-between mb-4 mt-2">
-                                <a href="#" class="form-link text-decoration-none" id="btnCadCliente">Cadastre-se</a>
+                                <a href="#" class="form-link text-decoration-none">Cadastre-se</a>
                                 <a href="#" class="form-link text-decoration-none">Esqueci minha senha</a>
                             </div>
 
                             <!-- Botão Cadastrar Prestador -->
-                            <button type="button" class="btn btn-prestador w-100" id="btnCadPrestador">Cadastrar como prestador</button>
+                            <button type="button" class="btn btn-prestador w-100">Cadastrar como prestador</button>
 
                         </form>
                     </div>
@@ -97,16 +96,16 @@
     <!-- Script Customizado Integrado -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+            const formLogin = document.getElementById("formLogin");
+            const emailInput = document.getElementById("email");
+            const senhaInput = document.getElementById("senha");
             const togglePassword = document.querySelector("#togglePassword");
-            const passwordInput = document.querySelector("#senha");
             const eyeIcon = document.querySelector("#eyeIcon");
 
             togglePassword.addEventListener("click", function () {
-                // Alterna o tipo do input entre 'password' e 'text'
-                const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
-                passwordInput.setAttribute("type", type);
+                const type = senhaInput.getAttribute("type") === "password" ? "text" : "password";
+                senhaInput.setAttribute("type", type);
 
-                // Alterna o ícone SVG entre olho fechado e aberto
                 if (type === "password") {
                     eyeIcon.innerHTML = `
                         <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
@@ -118,6 +117,44 @@
                         <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
                         <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
                     `;
+                }
+            });
+
+            formLogin.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                const emailInformado = emailInput.value.trim().toLowerCase();
+                const senhaInformada = senhaInput.value;
+
+                if (!emailInformado || !senhaInformada) {
+                    alert("Preencha e-mail e senha.");
+                    return;
+                }
+
+                const usuarios = JSON.parse(localStorage.getItem("usuariosBico") || "{}");
+                const usuario = usuarios[emailInformado];
+
+                if (!usuario) {
+                    alert("E-mail não encontrado.");
+                    return;
+                }
+
+                if (usuario.senha !== senhaInformada) {
+                    alert("Senha inválida.");
+                    return;
+                }
+
+                localStorage.setItem("usuarioLogado", JSON.stringify({
+                    email: emailInformado,
+                    tipo: usuario.tipo
+                }));
+
+                if (usuario.tipo === "prestador") {
+                    window.location.href = "../Prestador/PrestadorHome.html";
+                } else if (usuario.tipo === "cliente") {
+                    window.location.href = "../Cliente/ClienteHome.html";
+                } else {
+                    alert("Tipo de usuário inválido.");
                 }
             });
         });
