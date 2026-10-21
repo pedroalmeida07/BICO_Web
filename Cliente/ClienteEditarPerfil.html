@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BICO - Editar perfil</title>
+
+    <!-- Ícones do Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f2f2f2;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        /* HEADER / BARRA SUPERIOR */
+        .header {
+            background-color: #233044;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-tucano {
+            height: 45px;
+        }
+
+        .logo-nome {
+            height: 28px;
+        }
+
+        /* BARRA DE PESQUISA */
+        .search-form {
+            position: relative;
+            width: 380px;
+        }
+
+        .search-form input {
+            width: 100%;
+            padding: 9px 40px 9px 18px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .search-form button {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #333;
+            font-size: 15px;
+        }
+
+        /* NAVEGAÇÃO */
+        .header-nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-link.active {
+            color: #e08b35;
+        }
+
+        /* PERFIL HEADER */
+        .header-profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .profile-avatar-icon {
+            width: 42px;
+            height: 42px;
+            background-color: #8c93a0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #233044;
+            font-size: 26px;
+        }
+
+        .profile-name {
+            color: #ffffff;
+            font-size: 12px;
+            margin-top: 3px;
+            font-weight: bold;
+        }
+
+        /* LAYOUT PRINCIPAL */
+        .main-layout {
+            display: flex;
+            min-height: calc(100vh - 70px);
+        }
+
+        /* SIDEBAR DA ESQUERDA */
+        .sidebar {
+            width: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 30px;
+            gap: 18px;
+        }
+
+        .sidebar-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #233044;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        .sidebar-icon.active {
+            color: #e08b35;
+            border: 1px solid #e08b35;
+        }
+
+        /* ÁREA CENTRAL DE CONTEÚDO */
+        .content-area {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            padding: 30px 20px;
+        }
+
+        .profile-wrapper {
+            width: 100%;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* CARD BANNER SUPERIOR */
+        .user-card {
+            background-color: #d9d9d9;
+            width: 100%;
+            border-radius: 18px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-avatar-circle {
+            width: 55px;
+            height: 55px;
+            background-color: #666666;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d9d9d9;
+            font-size: 36px;
+        }
+
+        .user-title {
+            font-size: 17px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .btn-mudar-foto {
+            background-color: #e08b35;
+            color: #fff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* FORMULÁRIO */
+        .edit-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .form-group label {
+            font-size: 12px;
+            color: #222;
+            padding-left: 4px;
+        }
+
+        .input-box {
+            position: relative;
+            width: 100%;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 8px 45px 8px 16px;
+            border-radius: 18px;
+            border: 1px solid #555;
+            background-color: #fff;
+            font-size: 13px;
+            outline: none;
+            color: #333;
+        }
+
+        .input-icons {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #000;
+            font-size: 13px;
+        }
+
+        /* BOTÃO SALVAR */
+        .btn-salvar-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .btn-salvar {
+            background-color: #233044;
+            color: #fff;
+            border: none;
+            padding: 10px 45px;
+            border-radius: 14px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Barra Superior -->
+    <header class="header">
+        <a class="header-logo" href="#inicio">
+            <img src="../Icones/bico_tucan.png" alt="" class="logo-tucano">
+            <img src="../Icones/bico_logo.png" alt="BICO" class="logo-nome">
+        </a>
+
+        <form class="search-form" role="search">
+            <input type="search" placeholder="Pesquisar um serviço ou prestador">
+            <button type="submit"><i class="bi bi-search"></i></button>
+        </form>
+
+        <nav class="header-nav">
+            <a href="#inicio" class="nav-link">Início</a>
+            <a href="#mensagens" class="nav-link">Mensagens</a>
+            <a href="#configuracoes" class="nav-link active">Configurações</a>
+        </nav>
+
+        <a class="header-profile" href="#perfil">
+            <div class="profile-avatar-icon">
+                <i class="bi bi-person-fill"></i>
+            </div>
+            <span class="profile-name">Kleber Nunes</span>
+        </a>
+    </header>
+
+    <div class="main-layout">
+        <!-- Sidebar Esquerda -->
+        <aside class="sidebar">
+            <a href="#inicio" class="sidebar-icon" title="Início"><i class="bi bi-house"></i></a>
+            <a href="#privacidade" class="sidebar-icon" title="Privacidade"><i class="bi bi-shield-lock"></i></a>
+            <a href="#perfil" class="sidebar-icon active" title="Editar perfil"><i class="bi bi-person"></i></a>
+            <a href="#favoritos" class="sidebar-icon" title="Favoritos"><i class="bi bi-star"></i></a>
+            <a href="#ajuda" class="sidebar-icon" title="Ajuda"><i class="bi bi-question-circle"></i></a>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="content-area">
+            <div class="profile-wrapper">
+                
+                <!-- Card Superior -->
+                <div class="user-card">
+                    <div class="user-info">
+                        <div class="user-avatar-circle">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <span class="user-title">Kleber Nunes</span>
+                    </div>
+                    <button class="btn-mudar-foto" type="button">Mudar foto</button>
+                </div>
+
+                <!-- Formulário de Edição -->
+                <form class="edit-form">
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <div class="input-box">
+                            <input type="text" id="nome" value="Usuário">
+                            <div class="input-icons"><i class="bi bi-pencil-fill"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefone">Telefone</label>
+                        <div class="input-box">
+                            <input type="text" id="telefone" value="+55 (27) 99999-8888">
+                            <div class="input-icons"><i class="bi bi-pencil-fill"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <div class="input-box">
+                            <input type="email" id="email" value="usuario@email.com">
+                            <div class="input-icons"><i class="bi bi-pencil-fill"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="senha">Senha</label>
+                        <div class="input-box">
+                            <input type="password" id="senha" value="*******************">
+                            <div class="input-icons">
+                                <i class="bi bi-eye"></i>
+                                <i class="bi bi-pencil-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cep">CEP</label>
+                        <div class="input-box">
+                            <input type="text" id="cep" value="29166-630">
+                            <div class="input-icons"><i class="bi bi-pencil-fill"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rua">Rua</label>
+                        <div class="input-box">
+                            <input type="text" id="rua" value="Av. dos Sábias">
+                            <div class="input-icons"><i class="bi bi-pencil-fill"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numero">Número</label>
+                        <div class="input-box">
+                            <input type="text" id="numero" value="330">
+                            <div class="input-icons"><i class="bi bi-pencil-fill"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="complemento">Complemento</label>
+                        <div class="input-box">
+                            <input type="text" id="complemento" value="">
+                            <div class="input-icons"><i class="bi bi-pencil-fill"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="btn-salvar-container">
+                        <button type="submit" class="btn-salvar">Salvar</button>
+                    </div>
+                </form>
+
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
