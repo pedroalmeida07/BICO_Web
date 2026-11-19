@@ -1,4 +1,6 @@
 import { api } from '../API/apiService.js';
+import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+import { auth } from '../API/firebase.js';
 
 // Elementos da tela
 const btnAvancar = document.getElementById("btnAvancar");
@@ -54,22 +56,20 @@ btnAvancar.addEventListener("click", async function () {
     btnAvancar.disabled = true;
     btnAvancar.textContent = "Cadastrando...";
 
+    // Salva o perfil do cliente na API
     const resultado = await api.criarCliente(payloadCliente);
     console.log("Cliente cadastrado com sucesso:", resultado);
 
     const emailNormalizado = email.value.trim().toLowerCase();
-    const usuarios = JSON.parse(localStorage.getItem("usuariosBico") || "{}");
 
-    usuarios[emailNormalizado] = {
-      tipo: "cliente",
-      senha: senha.value
-    };
-
-    localStorage.setItem("usuariosBico", JSON.stringify(usuarios));
-    localStorage.setItem("usuarioLogado", JSON.stringify({
-      email: emailNormalizado,
-      tipo: "cliente"
-    }));
+    try {
+      // Cria o usuário no Firebase Auth
+      await createUserWithEmailAndPassword(auth, emailNormalizado, senha.value);
+    } catch (erroFirebase) {
+      if (erroFirebase.code !== "auth/email-already-in-use") {
+        throw erroFirebase;
+      }
+    }
 
     sessionStorage.removeItem("dadosCadastroCliente");
     window.location.href = "../Login/Login.html";

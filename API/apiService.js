@@ -1,4 +1,33 @@
-const BASE_URL = 'https://archlinux.tailee8728.ts.net/';
+const BASE_URL = 'https://archlinux.tailee8728.ts.net';
+
+const buscarPerfil = async (rota, token) => {
+  const response = await fetch(`${BASE_URL}/${rota}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    await tratarErroResponse(response, rota);
+  }
+
+  return await response.json();
+};
+
+const tratarErroResponse = async (response, tipo) => {
+  let mensagem = `Erro ao processar ${tipo}.`;
+
+  try {
+    const dados = await response.json();
+    mensagem = dados.message || dados.error || dados.detail || mensagem;
+  } catch (_) {
+    // Mantém a mensagem padrão quando a resposta não contém JSON.
+  }
+
+  const erro = new Error(mensagem);
+  erro.status = response.status;
+  throw erro;
+};
 
 export const api = {
   buscarCliente: (token) => buscarPerfil('clientes', token),

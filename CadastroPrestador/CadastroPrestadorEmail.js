@@ -1,4 +1,6 @@
 import { api } from '../API/apiService.js';
+import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+import { auth } from '../API/firebase.js';
 
 // Elementos da tela
 const btnAvancar = document.getElementById("btnAvancar");
@@ -59,18 +61,14 @@ btnAvancar.addEventListener("click", async function () {
     console.log("Prestador cadastrado com sucesso:", resultado);
 
     const emailNormalizado = email.value.trim().toLowerCase();
-    const usuarios = JSON.parse(localStorage.getItem("usuariosBico") || "{}");
 
-    usuarios[emailNormalizado] = {
-      tipo: "prestador",
-      senha: senha.value
-    };
-
-    localStorage.setItem("usuariosBico", JSON.stringify(usuarios));
-    localStorage.setItem("usuarioLogado", JSON.stringify({
-      email: emailNormalizado,
-      tipo: "prestador"
-    }));
+    try {
+      await createUserWithEmailAndPassword(auth, emailNormalizado, senha.value);
+    } catch (erroFirebase) {
+      if (erroFirebase.code !== "auth/email-already-in-use") {
+        throw erroFirebase;
+      }
+    }
 
     sessionStorage.removeItem("dadosCadastroPrestador");
     window.location.href = "../Login/Login.html";
