@@ -68,11 +68,19 @@ function renderProfile() {
   }));
   servicePlaceholder.hidden = services.length > 0;
 
-  const profilePhotoUrl = profile.fotoPaginaPerfil || "";
+  const fallbackPhoto = "../Icones/bico_icone.png";
+  const profilePhotoUrl = profile.fotoPaginaPerfil || profile.fotoPerfil || fallbackPhoto;
   profilePhoto.src = profilePhotoUrl;
   profilePhoto.alt = profileName ? `Foto de ${profileName}` : "Foto do prestador";
-  profilePhoto.classList.toggle("hidden", !profilePhotoUrl);
-  profilePhotoPlaceholder.classList.toggle("hidden", Boolean(profilePhotoUrl));
+  profilePhoto.classList.remove("hidden");
+  profilePhotoPlaceholder.classList.add("hidden");
+  profilePhoto.addEventListener("error", () => {
+    if (profilePhoto.dataset.fallbackApplied) {
+      return;
+    }
+    profilePhoto.dataset.fallbackApplied = "true";
+    profilePhoto.src = fallbackPhoto;
+  });
 
   photoGallery.replaceChildren(...galleryPhotos.map((url, index) => {
     const container = document.createElement("div");

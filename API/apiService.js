@@ -53,6 +53,23 @@ const enviarPrestador = async (token, dadosPrestador) => {
   return await response.json();
 };
 
+const enviarCliente = async (token, dadosCliente) => {
+  const response = await fetch(`${BASE_URL}/clientes`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(dadosCliente),
+  });
+
+  if (!response.ok) {
+    await tratarErroResponse(response, 'cliente');
+  }
+
+  return await response.json();
+};
+
 const atualizarFavorito = async (token, prestadorId, method) => {
   const parametros = new URLSearchParams({ id: prestadorId });
   const response = await fetch(`${BASE_URL}/clientes/favoritos?${parametros}`, {
@@ -135,5 +152,6 @@ export const api = {
     }
 
     return await response.json();
-  }
+  },
+  atualizarCliente: (token, dadosCliente) => enviarCliente(token, dadosCliente)
 };

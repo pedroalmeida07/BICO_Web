@@ -91,9 +91,17 @@ function createProviderCard(provider, isFavorite = false) {
   card.className = `provider-card${isFavorite ? " favorite-card" : ""}`;
 
   const avatar = document.createElement("img");
-  avatar.src = provider.fotoPerfil || "../Icones/bico_icone.png";
+  const fallbackAvatar = "../Icones/bico_icone.png";
+  avatar.src = provider.fotoPerfil || fallbackAvatar;
   avatar.alt = `Foto de ${name}`;
   avatar.className = "provider-avatar";
+  avatar.addEventListener("error", () => {
+    if (avatar.dataset.fallbackApplied) {
+      return;
+    }
+    avatar.dataset.fallbackApplied = "true";
+    avatar.src = fallbackAvatar;
+  });
 
   const info = document.createElement("div");
   info.className = "provider-info has-favorite-toggle";

@@ -15,10 +15,10 @@
 
   <!-- CABEÇALHO / HEADER -->
   <header class="header">
-    <div class="header-logo">
+    <a class="header-logo" href="PrestadorHome.html" aria-label="BICO - início">
       <img src="../Icones/bico_tucan.png" alt="Logo BICO" class="img-logo">
       <img src="../Icones/bico_logo.png" alt="Logo BICO" class="img-logo">
-    </div>
+    </a>
 
     <!-- CARDS DE ESTATÍSTICAS NO CABEÇALHO -->
     <div class="header-stats">
@@ -44,10 +44,10 @@
     </nav>
 
     <!-- PERFIL DO USUÁRIO -->
-    <div class="header-profile">
-      <img src="../Icones/Wellington_Matos.jpeg" alt="Welington Matos" class="profile-avatar">
-      <span class="profile-name">Welington Matos</span>
-    </div>
+    <a class="header-profile" href="PrestadorEditarPerfil.html" id="providerHeaderProfile">
+      <img src="../Icones/bico_icone.png" alt="Foto do prestador" class="profile-avatar" id="providerHeaderAvatar">
+      <span class="profile-name" id="providerHeaderName">Prestador</span>
+    </a>
   </header>
 
   <!-- CORPO PRINCIPAL DA PÁGINA -->
@@ -55,7 +55,7 @@
 
     <!-- BARRA LATERAL COM ÍCONES/VETORES -->
     <aside class="sidebar" aria-label="Atalhos">
-            <a href="#inicio" class="sidebar-icon active" title="Página inicial" aria-label="Página inicial"><img src="../Icones/HomeLaranja.png" alt="Página Inicial"></a>
+            <a href="PrestadorHome.html" class="sidebar-icon active" title="Página inicial" aria-label="Página inicial"><img src="../Icones/HomeLaranja.png" alt="Página Inicial"></a>
             <a href="PrestadorEditarPerfil.html" class="sidebar-icon" title="Editar perfil" aria-label="Editar perfil"><img src="../Icones/UserPreto.png" alt="Editar Perfil"></a>
         </aside>
 
@@ -141,6 +141,40 @@
 
     </main>
   </div>
-  
+
+  <script type="module">
+    import { api } from "../API/apiService.js";
+    import { auth } from "../API/firebase.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+
+    const fallbackAvatar = "../Icones/bico_icone.png";
+    const avatar = document.querySelector("#providerHeaderAvatar");
+    const name = document.querySelector("#providerHeaderName");
+
+    avatar.addEventListener("error", () => {
+      if (!avatar.dataset.fallbackApplied) {
+        avatar.dataset.fallbackApplied = "true";
+        avatar.src = fallbackAvatar;
+      }
+    });
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        return;
+      }
+
+      try {
+        const token = await user.getIdToken();
+        const profile = await api.buscarPrestador(token);
+        const profileName = profile?.nome || profile?.username || "Prestador";
+        name.textContent = profileName;
+        avatar.alt = `Foto de ${profileName}`;
+        avatar.src = profile?.fotoPerfil || profile?.fotoPaginaPerfil || fallbackAvatar;
+      } catch (_) {
+        name.textContent = "Prestador";
+        avatar.src = fallbackAvatar;
+      }
+    });
+  </script>
 </body>
 </html>

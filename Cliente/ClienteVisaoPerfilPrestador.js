@@ -27,11 +27,19 @@ function renderProfile(prestador) {
   profileAbout.textContent = prestador.sobre || "Este profissional ainda não adicionou uma descrição.";
   profileLocation.textContent = prestador.localAtuacao || "Local de atuação não informado.";
 
-  const photoUrl = prestador.fotoPaginaPerfil || prestador.fotoPerfil || "";
+  const fallbackPhoto = "../Icones/bico_icone.png";
+  const photoUrl = prestador.fotoPaginaPerfil || prestador.fotoPerfil || fallbackPhoto;
   profilePhoto.src = photoUrl;
   profilePhoto.alt = `Foto de ${name}`;
-  profilePhoto.classList.toggle("hidden", !photoUrl);
-  profilePhotoPlaceholder.classList.toggle("hidden", Boolean(photoUrl));
+  profilePhoto.classList.remove("hidden");
+  profilePhotoPlaceholder.classList.add("hidden");
+  profilePhoto.addEventListener("error", () => {
+    if (profilePhoto.dataset.fallbackApplied) {
+      return;
+    }
+    profilePhoto.dataset.fallbackApplied = "true";
+    profilePhoto.src = fallbackPhoto;
+  });
 
   serviceList.replaceChildren(...services.map((service) => {
     const item = document.createElement("div");
