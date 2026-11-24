@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BICO - Editar perfil do prestador</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #8c8c8c; /* Exact gray background outside the container */
+        }
+        /* Custom scrollbar for horizontal scroll view */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .edit-pencil {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            padding: 5px;
+            border: 0;
+            border-radius: 6px;
+            background: transparent;
+            cursor: pointer;
+            flex: 0 0 auto;
+        }
+        .edit-pencil:hover,
+        .edit-pencil:focus-visible {
+            background: #f1f5f9;
+        }
+        .edit-pencil img {
+            display: block;
+            width: 16px;
+            height: 16px;
+        }
+        .profile-edit-dialog {
+            width: min(90vw, 34rem);
+            max-width: none;
+            padding: 0;
+            border: 0;
+            border-radius: 1rem;
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.25);
+        }
+        .profile-edit-dialog::backdrop {
+            background: rgba(15, 23, 42, 0.55);
+        }
+        #profileAbout[data-empty="true"]::before {
+            color: #64748b;
+            content: attr(data-placeholder);
+        }
+    </style>
+    <link rel="stylesheet" href="/Cliente/Cliente.css">
+</head>
+<body class="h-screen flex flex-col overflow-hidden text-slate-800">
+
+    <div class="w-full h-screen bg-white flex flex-col overflow-hidden">
+
+        <!-- Top Navbar -->
+        <header class="header">
+        <a class="header-logo" href="#inicio">
+            <img src="../Icones/bico_tucan.png" alt="" class="logo-tucano">
+            <img src="../Icones/bico_logo.png" alt="BICO" class="logo-nome">
+        </a>
+
+        <form class="search-form" role="search">
+            <input type="search" placeholder="Pesquisar um serviço ou prestador">
+            <button type="submit"><i class="bi bi-search"></i></button>
+        </form>
+
+        <nav class="header-nav">
+            <a href="ClienteHome.html" class="nav-link">Início</a>
+            <a href="#mensagens" class="nav-link">Mensagens</a>
+            <a href="#configuracoes" class="nav-link active">Configurações</a>
+        </nav>
+
+        <a class="header-profile" href="#perfil">
+            <div class="profile-avatar-icon">
+                <i class="bi bi-person-fill"></i>
+            </div>
+            <span class="profile-name">Kleber Nunes</span>
+        </a>
+    </header>
+
+        <!-- Main Body Area with Sidebar and Scrollable Content -->
+        <div class="flex flex-1 min-h-0 relative bg-white">
+            
+            <!-- Left Sidebar Navigation -->
+            <aside class="sidebar" aria-label="Atalhos">
+            <a href="#inicio" class="sidebar-icon active" title="Página inicial" aria-label="Página inicial"><img src="../Icones/HomeLaranja.png" alt="Página Inicial"></a>
+            <a href="ClienteEditarPerfil.html" class="sidebar-icon" title="Editar perfil" aria-label="Editar perfil"><img src="../Icones/UserPreto.png" alt="Editar Perfil"></a>
+            <a href="#favoritos" class="sidebar-icon" title="Favoritos" aria-label="Favoritos"><img src="../Icones/StarPreto.png" alt="Favoritos"></a>
+        </aside>
+
+            <!-- Main Scroll View Content -->
+            <main class="flex-1 min-h-0 px-8 py-6 overflow-y-auto">
+                <div class="max-w-2xl mx-auto">
+                    
+                    <!-- Main Electrician Photo -->
+                    <div class="flex justify-center mb-6">
+                        <div class="relative w-[280px] h-[180px] rounded-2xl overflow-hidden shadow-sm">
+                            <img id="profilePhoto" src="" alt="" class="w-full h-full object-cover hidden">
+                            <div id="profilePhotoPlaceholder" class="w-full h-full flex items-center justify-center bg-slate-100 text-slate-500 text-center text-sm p-4">
+                                Adicione uma foto para apresentar seu trabalho
+                            </div>
+                            <button type="button" class="edit-pencil absolute right-2 top-2 bg-white/90" data-edit-photo="profile" aria-label="Editar foto principal" title="Editar foto principal">
+                                <img src="../Icones/pencil-svgrepo-com.svg" alt="">
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Title & Name -->
+                    <h1 class="text-lg font-bold text-[#233142] mb-4 flex items-center gap-2">
+                        <span id="profileTitle">Carregando perfil...</span>
+                        <button type="button" class="edit-pencil" data-edit-field="name" aria-label="Editar nome" title="Editar nome" disabled>
+                            <img src="../Icones/pencil-svgrepo-com.svg" alt="">
+                        </button>
+                    </h1>
+
+                    <!-- Sobre Section -->
+                    <section class="mb-5">
+                        <h2 class="text-sm font-bold text-slate-800 mb-1 flex items-center gap-2">
+                            Sobre
+                            <button type="button" class="edit-pencil" data-edit-field="about" aria-label="Editar descrição" title="Editar descrição">
+                                <img src="../Icones/pencil-svgrepo-com.svg" alt="">
+                            </button>
+                        </h2>
+                        <p id="profileAbout" data-placeholder="Escreva um breve resumo sobre o seu trabalho." class="text-slate-500 text-[11px] leading-relaxed max-w-lg">
+                        </p>
+                    </section>
+
+                    <!-- Serviços Oferecidos (Horizontal Scroll Bar) -->
+                    <section class="mb-6">
+                        <h2 class="text-sm font-bold text-slate-800 mb-2 flex items-center gap-2">
+                            Serviços Oferecidos
+                            <button type="button" class="edit-pencil" data-edit-field="services" aria-label="Editar serviços" title="Editar serviços">
+                                <img src="../Icones/pencil-svgrepo-com.svg" alt="">
+                            </button>
+                        </h2>
+                        <div id="serviceList" class="flex items-center space-x-3 overflow-x-auto py-1 no-scrollbar">
+                        </div>
+                        <p id="servicePlaceholder" class="text-slate-500 text-xs">Nenhum serviço cadastrado.</p>
+                    </section>
+
+                    <!-- Local de Atuação -->
+                    <section class="mb-6">
+                        <h2 class="text-sm font-bold text-slate-800 mb-2 flex items-center gap-2">
+                            Local de Atuação
+                            <button type="button" class="edit-pencil" data-edit-field="location" aria-label="Editar local de atuação" title="Editar local de atuação">
+                                <img src="../Icones/pencil-svgrepo-com.svg" alt="">
+                            </button>
+                        </h2>
+                        <div class="flex items-start space-x-2">
+                            <i class="fa-solid fa-location-dot text-amber-500 text-lg mt-0.5"></i>
+                            <div>
+                                <p id="profileLocation" class="text-xs font-bold text-slate-700">Local de atuação não informado.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Fotos Gallery -->
+                    <section class="mb-8">
+                        <h2 class="text-sm font-bold text-slate-800 mb-3 flex items-center gap-2">
+                            Fotos
+                            <button type="button" class="edit-pencil" data-edit-photo="gallery" aria-label="Editar fotos da galeria" title="Editar fotos da galeria">
+                                <img src="../Icones/pencil-svgrepo-com.svg" alt="">
+                            </button>
+                        </h2>
+                        <div id="photoGallery" class="grid grid-cols-4 gap-3"></div>
+                        <p id="galleryPlaceholder" class="text-slate-500 text-xs">Adicione fotos dos seus serviços.</p>
+                    </section>
+
+                </div>
+            </main>
+
+        </div>
+
+    </div>
+
+    <dialog id="profileEditDialog" class="profile-edit-dialog">
+        <form id="profileEditForm" class="p-6">
+            <h2 id="profileEditTitle" class="text-lg font-bold text-slate-800 mb-4"></h2>
+            <label id="profileEditLabel" for="profileEditInput" class="block text-sm font-medium text-slate-700 mb-2"></label>
+            <textarea id="profileEditInput" rows="5" class="w-full border border-slate-300 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"></textarea>
+            <p id="profileEditHint" class="text-xs text-slate-500 mt-2"></p>
+            <div class="flex justify-end gap-3 mt-5">
+                <button id="cancelProfileEdit" type="button" class="px-4 py-2 rounded-lg border border-slate-300 text-slate-700 text-sm">Cancelar</button>
+                <button type="submit" class="px-4 py-2 rounded-lg bg-amber-600 text-white text-sm">Salvar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <input id="profilePhotoInput" type="file" accept="image/*" class="hidden">
+    <input id="galleryPhotoInput" type="file" accept="image/*" multiple class="hidden">
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-900 text-white px-5 py-2.5 rounded-xl shadow-xl transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center space-x-2">
+        <i class="fa-solid fa-info-circle text-amber-400 text-sm"></i>
+        <span id="toast-message" class="text-xs font-medium">Ação solicitada com sucesso!</span>
+    </div>
+
+    <script type="module" src="PrestadorEditarPerfil.js"></script>
+</body>
+</html>

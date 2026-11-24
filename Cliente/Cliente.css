@@ -252,6 +252,15 @@ input {
   color: #1e293b;
 }
 
+.provider-name a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.provider-name a:hover {
+  text-decoration: underline;
+}
+
 .rating {
   margin: 2px 0 6px;
   color: #111;
@@ -310,6 +319,12 @@ input {
   transition: background 0.2s ease, color 0.2s ease;
 }
 
+a.message-button {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}
+
 .message-button:hover {
   background: var(--orange);
   color: #fff;
@@ -324,13 +339,35 @@ input {
   padding: 0;
   border: 0;
   background: transparent;
-  color: var(--orange);
   font-size: 16px;
   cursor: pointer;
 }
 
+.favorite-toggle[aria-pressed="true"] {
+  color: var(--orange);
+}
+
+.favorite-toggle[aria-pressed="false"] {
+  color: #64748b;
+}
+
+.favorite-toggle:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+.favorite-action-message {
+  margin-bottom: 16px;
+  color: var(--ink);
+  font-size: 0.9rem;
+}
+
 .favorite-card .provider-info {
   padding-right: 9px;
+}
+
+.provider-info.has-favorite-toggle {
+  padding-right: 28px;
 }
 
 .favorites-section {

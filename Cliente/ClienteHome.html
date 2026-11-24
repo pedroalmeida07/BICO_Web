@@ -17,7 +17,7 @@
             <img src="../Icones/bico_logo.png" alt="BICO" class="logo-nome">
         </a>
 
-        <form class="search-form" role="search">
+        <form id="providerSearchForm" class="search-form" role="search">
             <label class="visually-hidden" for="service-search">Pesquisar um serviço ou prestador</label>
             <input id="service-search" type="search" placeholder="Pesquisar um serviço ou prestador">
             <button type="submit" aria-label="Pesquisar"><i class="bi bi-search" aria-hidden="true"></i></button>
@@ -38,52 +38,17 @@
     <div class="main-layout" id="inicio">
         <aside class="sidebar" aria-label="Atalhos">
             <a href="#inicio" class="sidebar-icon active" title="Página inicial" aria-label="Página inicial"><img src="../Icones/HomeLaranja.png" alt="Página Inicial"></a>
-            <a href="#privacidade" class="sidebar-icon" title="Privacidade" aria-label="Privacidade"><img src="../Icones/LockPreto.png" alt="Privacidade"></a>
             <a href="ClienteEditarPerfil.html" class="sidebar-icon" title="Editar perfil" aria-label="Editar perfil"><img src="../Icones/UserPreto.png" alt="Editar Perfil"></a>
             <a href="#favoritos" class="sidebar-icon" title="Favoritos" aria-label="Favoritos"><img src="../Icones/StarPreto.png" alt="Favoritos"></a>
-            <a href="#ajuda" class="sidebar-icon" title="Ajuda" aria-label="Ajuda"><img src="../Icones/HelpPreto.png" alt="Ajuda"></a>
         </aside>
 
         <main class="content-area">
+            <p id="favoriteActionMessage" class="favorite-action-message" role="status" aria-live="polite" hidden></p>
             <!-- Sessão de Melhor Avaliados -->
             <section class="section" aria-labelledby="rated-title">
-                <h1 class="section-title" id="rated-title">Melhor Avaliados</h1>
-                <div class="cards-grid">
-                    <article class="provider-card">
-                        <img src="../Icones/Wellington_Matos.jpeg" alt="Serjio Krüger" class="provider-avatar">
-                        <div class="provider-info">
-                            <h2 class="provider-name">Serjio Krüger - Encanador</h2>
-                            <p class="rating"><span aria-label="5 de 5 estrelas">★★★★★</span> (41)</p>
-                            <p class="provider-description">Sou o melhor encanador da região, meu lema é que nunca irei te deixar na mão.</p>
-                            <a class="provider-phone" href="tel:+5527940808922">(27) 94082-8922</a>
-                            <p class="provider-location"><img src="../Icones/PinLaranja.png" alt="Local"> Serra - ES</p>
-                        </div>
-                        <button class="message-button" type="button">Enviar Mensagem</button>
-                    </article>
-
-                    <article class="provider-card">
-                        <img src="../Icones/Wellington_Matos.jpeg" alt="Ana Lyrio" class="provider-avatar">
-                        <div class="provider-info">
-                            <h2 class="provider-name">Ana Lyrio - Faxineira</h2>
-                            <p class="rating"><span aria-label="5 de 5 estrelas">★★★★★</span> (68)</p>
-                            <p class="provider-description">Não é delírio, a melhor faxina é com Ana Lyrio!</p>
-                            <a class="provider-phone" href="tel:+5527991989877">(27) 99918-9877</a>
-                            <p class="provider-location"><img src="../Icones/PinLaranja.png" alt="Local"> Cariacica - ES</p>
-                        </div>
-                        <button class="message-button" type="button">Enviar Mensagem</button>
-                    </article>
-
-                    <article class="provider-card">
-                        <img src="../Icones/Wellington_Matos.jpeg" alt="Hugo Neves" class="provider-avatar">
-                        <div class="provider-info">
-                            <h2 class="provider-name">Hugo Neves - Pedreiro</h2>
-                            <p class="rating"><span aria-label="5 de 5 estrelas">★★★★★</span> (77)</p>
-                            <p class="provider-description">Pedreiro com experiência em construção, reformas e acabamentos residenciais.</p>
-                            <a class="provider-phone" href="tel:+5527998473612">(27) 99847-3612</a>
-                            <p class="provider-location"><img src="../Icones/PinLaranja.png" alt="Local"> Serra - ES</p>
-                        </div>
-                        <button class="message-button" type="button">Enviar Mensagem</button>
-                    </article>
+                <h1 class="section-title" id="provider-results-title">Melhor Avaliados</h1>
+                <div class="cards-grid" id="providerResults" aria-live="polite">
+                    <p class="provider-description">Carregando prestadores...</p>
                 </div>
             </section>
 
@@ -93,35 +58,12 @@
                     <h2 class="section-title" id="favorites-title">Favoritos</h2>
                     <a class="view-all" href="#todos-favoritos">Ver Todos</a>
                 </div>
-                <div class="cards-grid">
-                    <article class="provider-card favorite-card">
-                        <img src="../Icones/Wellington_Matos.jpeg" alt="Welington Matos" class="provider-avatar">
-                        <div class="provider-info">
-                            <h3 class="provider-name">Welington Matos - Eletricista</h3>
-                            <p class="rating"><span aria-label="5 de 5 estrelas">★★★★★</span> (67)</p>
-                            <p class="provider-description">Sou Welington Matos, eletricista com experiência em instalações e manutenções elétricas.</p>
-                            <a class="provider-phone" href="tel:+5527967222267">(27) 96722-2267</a>
-                            <p class="provider-location"><img src="../Icones/PinLaranja.png" alt="Local"> Serra - ES</p>
-                        </div>
-                        <button class="favorite-toggle" type="button" aria-label="Remover Welington dos favoritos" aria-pressed="true"><i class="bi bi-star-fill" aria-hidden="true"></i></button>
-                        <button class="message-button" type="button">Enviar Mensagem</button>
-                    </article>
-
-                    <article class="provider-card favorite-card">
-                        <img src="../Icones/Wellington_Matos.jpeg" alt="Takamasa Nomuro" class="provider-avatar">
-                        <div class="provider-info">
-                            <h3 class="provider-name">Takamasa Nomuro - Ajudante</h3>
-                            <p class="rating"><span aria-label="5 de 5 estrelas">★★★★★</span> (112)</p>
-                            <p class="provider-description">Ajudante de pedreiro dedicado, oferecendo serviços com responsabilidade e pontualidade.</p>
-                            <a class="provider-phone" href="tel:+5527996128043">(27) 99612-8043</a>
-                            <p class="provider-location"><img src="../Icones/PinLaranja.png" alt="Local"> Vitória - ES</p>
-                        </div>
-                        <button class="favorite-toggle" type="button" aria-label="Remover Takamasa dos favoritos" aria-pressed="true"><i class="bi bi-star-fill" aria-hidden="true"></i></button>
-                        <button class="message-button" type="button">Enviar Mensagem</button>
-                    </article>
+                <div class="cards-grid" id="favoriteResults" aria-live="polite">
+                    <p class="provider-description">Carregando favoritos...</p>
                 </div>
             </section>
         </main>
     </div>
+    <script type="module" src="ClienteHome.js"></script>
 </body>
 </html>
