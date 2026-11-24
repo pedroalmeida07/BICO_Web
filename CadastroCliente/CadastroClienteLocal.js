@@ -31,6 +31,21 @@ document.addEventListener("DOMContentLoaded", function () {
   if (dadosSalvos.Complemento) complemento.value = dadosSalvos.Complemento;
 });
 
+function salvarRascunho() {
+  const dadosAtuais = JSON.parse(sessionStorage.getItem("dadosCadastroCliente") || "{}");
+  sessionStorage.setItem("dadosCadastroCliente", JSON.stringify({
+    ...dadosAtuais,
+    Cep: cep.value,
+    Telefone: telefone.value,
+    Numero: numero.value,
+    Complemento: complemento.value
+  }));
+}
+
+[cep, telefone, numero, complemento].forEach((campo) => {
+  campo.addEventListener("input", salvarRascunho);
+});
+
 btnAvancar.addEventListener("click", function () {
   limparErro();
 

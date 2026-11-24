@@ -1,6 +1,7 @@
 import { api } from '../API/apiService.js';
 import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 import { auth } from '../API/firebase.js';
+import { initializePasswordToggles } from "../Utils/passwordToggle.js";
 
 // Elementos da tela
 const btnAvancar = document.getElementById("btnAvancar");
@@ -9,6 +10,11 @@ const email = document.getElementById("email");
 const senha = document.getElementById("senha");
 const confSenha = document.getElementById("confSenha");
 const mensagemErro = document.getElementById("mensagemErro");
+const emailDraftKey = "rascunhoEmailCadastroCliente";
+
+initializePasswordToggles();
+email.value = sessionStorage.getItem(emailDraftKey) || "";
+email.addEventListener("input", () => sessionStorage.setItem(emailDraftKey, email.value));
 
 function mostrarErro(texto) {
   mensagemErro.textContent = texto;
@@ -72,6 +78,7 @@ btnAvancar.addEventListener("click", async function () {
     }
 
     sessionStorage.removeItem("dadosCadastroCliente");
+    sessionStorage.removeItem(emailDraftKey);
     window.location.href = "../Login/Login.html";
 
   } catch (erro) {

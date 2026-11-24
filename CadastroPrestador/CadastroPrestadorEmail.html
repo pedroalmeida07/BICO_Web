@@ -31,8 +31,14 @@
                     <form id="formCadastro">
                         <div class="d-flex flex-column gap-4 mb-5">
                             <input id="email" type="email" class="form-control form-input" placeholder="Email" autocomplete="email">
-                            <input id="senha" type="password" class="form-control form-input" placeholder="Senha" autocomplete="new-password">
-                            <input id="confSenha" type="password" class="form-input form-control" placeholder="Confirmar Senha" autocomplete="new-password">
+                            <div class="password-field">
+                                <input id="senha" type="password" class="form-control form-input" placeholder="Senha" autocomplete="new-password">
+                                <button type="button" class="password-toggle" data-password-toggle="senha" aria-label="Mostrar senha"></button>
+                            </div>
+                            <div class="password-field">
+                                <input id="confSenha" type="password" class="form-input form-control" placeholder="Confirmar Senha" autocomplete="new-password">
+                                <button type="button" class="password-toggle" data-password-toggle="confSenha" aria-label="Mostrar senha"></button>
+                            </div>
                         </div>
 
                         <div class="d-grid gap-3">

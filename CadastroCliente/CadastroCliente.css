@@ -79,6 +79,34 @@ body {
     border-bottom-color: #252e3e;
 }
 
+.password-field {
+    position: relative;
+    width: 100%;
+}
+
+.password-field .form-input {
+    padding-right: 42px;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 4px;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    padding: 6px;
+    border: 0;
+    background: transparent;
+    color: #6c757d;
+    cursor: pointer;
+}
+
+.password-toggle:focus-visible {
+    outline: 2px solid #252e3e;
+    outline-offset: 2px;
+}
+
 /* Botões */
 .button-group-custom {
     display: flex;

@@ -33,8 +33,14 @@
             
                     <div class="input-group-custom">
                         <input id="email" type="email" class="form-input" placeholder="E-mail">
-                        <input id="senha" type="password" class="form-input" placeholder="Senha">
-                        <input id="confSenha" type="password" class="form-input" placeholder="Confirmar Senha">
+                        <div class="password-field">
+                            <input id="senha" type="password" class="form-input" placeholder="Senha">
+                            <button type="button" class="password-toggle" data-password-toggle="senha" aria-label="Mostrar senha"></button>
+                        </div>
+                        <div class="password-field">
+                            <input id="confSenha" type="password" class="form-input" placeholder="Confirmar Senha">
+                            <button type="button" class="password-toggle" data-password-toggle="confSenha" aria-label="Mostrar senha"></button>
+                        </div>
                     </div>
 
                     <div class="button-group-custom">

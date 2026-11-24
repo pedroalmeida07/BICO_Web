@@ -4,6 +4,28 @@ const btnAvancar = document.getElementById("btnAvancar");
 const btnVoltar = document.getElementById("btnVoltar");
 const nomeCompleto = document.getElementById("nomeCompleto");
 const cpf = document.getElementById("cpf");
+const telefone = document.getElementById("telefone");
+
+function salvarRascunho() {
+  const dadosAtuais = JSON.parse(sessionStorage.getItem("dadosCadastroPrestador") || "{}");
+  sessionStorage.setItem("dadosCadastroPrestador", JSON.stringify({
+    ...dadosAtuais,
+    Nome: nomeCompleto.value,
+    Cpf: cpf.value,
+    Telefone: telefone.value,
+  }));
+}
+
+const dadosSalvos = JSON.parse(sessionStorage.getItem("dadosCadastroPrestador") || "{}");
+nomeCompleto.value = dadosSalvos.Nome || "";
+cpf.value = dadosSalvos.Cpf ? formatarCpf(dadosSalvos.Cpf) : "";
+telefone.value = dadosSalvos.Telefone ? formatarTelefone(dadosSalvos.Telefone) : "";
+
+nomeCompleto.addEventListener("input", salvarRascunho);
+telefone.addEventListener("input", () => {
+  telefone.value = formatarTelefone(telefone.value);
+  salvarRascunho();
+});
 
 function formatarCpf(valor) {
   const digitos = valor.replace(/\D/g, "").slice(0, 11);
@@ -18,6 +40,17 @@ function formatarCpf(valor) {
     return `${digitos.slice(0, 3)}.${digitos.slice(3)}`;
   }
   return digitos;
+}
+
+function formatarTelefone(valor) {
+  const digitos = valor.replace(/\D/g, "").slice(0, 11);
+  if (digitos.length <= 2) {
+    return digitos ? `(${digitos}` : "";
+  }
+  if (digitos.length <= 7) {
+    return `(${digitos.slice(0, 2)}) ${digitos.slice(2)}`;
+  }
+  return `(${digitos.slice(0, 2)}) ${digitos.slice(2, 7)}-${digitos.slice(7)}`;
 }
 
 cpf.addEventListener("input", function () {
@@ -38,6 +71,7 @@ cpf.addEventListener("input", function () {
     novaPosicao++;
   }
   cpf.setSelectionRange(novaPosicao, novaPosicao);
+  salvarRascunho();
 });
 
 btnAvancar.addEventListener("click", function () {
@@ -53,6 +87,11 @@ btnAvancar.addEventListener("click", function () {
     alert("CPF inválido. Verifique os números digitados.");
     return;
   }
+  if (telefone.value.replace(/\D/g, "").length !== 11) {
+    alert("Insira um telefone válido com DDD e 9 dígitos.");
+    telefone.focus();
+    return;
+  }
 
   // Recupera o objeto existente ou inicia um novo
   const dadosAtuais = JSON.parse(sessionStorage.getItem("dadosCadastroPrestador") || "{}");
@@ -61,7 +100,8 @@ btnAvancar.addEventListener("click", function () {
   const novosDados = {
     ...dadosAtuais,
     Nome: nomeCompleto.value.trim(),
-    Cpf: cpf.value.trim()
+    Cpf: cpf.value.trim(),
+    Telefone: telefone.value.trim()
   };
 
   // Salva no sessionStorage

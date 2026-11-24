@@ -30,8 +30,12 @@
                     
                     <form id="formCadastro">
                         <div class="d-flex flex-column gap-4 mb-5">
-                            <input id="servico" type="text" class="form-control form-input" placeholder="Tipo de Serviço" autocomplete="organization-title">
-                            <input id="local" type="text" class="form-control form-input" placeholder="Local de Atuação" autocomplete="address-level2">
+                            <input id="servico" type="text" class="form-control form-input" placeholder="Digite e selecione um serviço" autocomplete="off" list="servicoOptions" aria-describedby="servicoStatus">
+                            <datalist id="servicoOptions"></datalist>
+                            <p id="servicoStatus" class="mb-0 text-muted" role="status" aria-live="polite">Digite para ver as opções e selecione um serviço da lista.</p>
+                            <input id="cep" type="text" class="form-control form-input" placeholder="CEP" autocomplete="postal-code" inputmode="numeric" maxlength="9" aria-describedby="cepStatus">
+                            <input id="local" type="text" class="form-control form-input" placeholder="Local de Atuação (preenchido pelo CEP)" autocomplete="address-level2" readonly>
+                            <p id="cepStatus" class="mb-0" role="status" aria-live="polite"></p>
                         </div>
 
                         <div class="d-grid gap-3">

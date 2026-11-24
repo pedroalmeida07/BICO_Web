@@ -2,6 +2,18 @@ const btnAvancar = document.getElementById("btnAvancar");
 const btnVoltar = document.getElementById("btnVoltar");
 const usuario = document.getElementById("usuario");
 
+function salvarRascunho() {
+  const dadosAtuais = JSON.parse(sessionStorage.getItem("dadosCadastroPrestador") || "{}");
+  sessionStorage.setItem("dadosCadastroPrestador", JSON.stringify({
+    ...dadosAtuais,
+    Username: usuario.value,
+  }));
+}
+
+const dadosSalvos = JSON.parse(sessionStorage.getItem("dadosCadastroPrestador") || "{}");
+usuario.value = dadosSalvos.Username || dadosSalvos.username || "";
+usuario.addEventListener("input", salvarRascunho);
+
 btnAvancar.addEventListener("click", function () {
   if (!usuario.value.trim()) {
     alert("Insira um nome de usuário!");

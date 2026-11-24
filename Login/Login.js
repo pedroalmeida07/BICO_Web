@@ -91,6 +91,18 @@ const formLogin = document.querySelector("#formLogin");
 const togglePassword = document.querySelector("#togglePassword");
 const passwordInput = document.querySelector("#senha");
 const eyeIcon = document.querySelector("#eyeIcon");
+const clientSignupLink = document.querySelector("#clientSignupLink");
+const providerSignupLink = document.querySelector("#providerSignupLink");
+
+clientSignupLink.addEventListener("click", () => {
+    sessionStorage.removeItem("dadosCadastroCliente");
+    sessionStorage.removeItem("rascunhoEmailCadastroCliente");
+});
+
+providerSignupLink.addEventListener("click", () => {
+    sessionStorage.removeItem("dadosCadastroPrestador");
+    sessionStorage.removeItem("rascunhoEmailCadastroPrestador");
+});
 
 togglePassword.addEventListener("click", function () {
     const senhaVisivel = passwordInput.type === "password";

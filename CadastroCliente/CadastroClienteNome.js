@@ -40,6 +40,7 @@ cpf.addEventListener("input", function () {
     novaPosicao++;
   }
   cpf.setSelectionRange(novaPosicao, novaPosicao);
+  salvarRascunho();
 });
 
 function mostrarErro(texto) {
@@ -56,13 +57,19 @@ function limparErro() {
   }
 }
 
-// Restaura os dados caso o usuário tenha preenchido e voltado a esta tela
-document.addEventListener("DOMContentLoaded", function () {
-  const dadosSalvos = JSON.parse(sessionStorage.getItem("dadosCadastroCliente") || "{}");
-  
-  if (dadosSalvos.Nome) nomeCompleto.value = dadosSalvos.Nome;
-  if (dadosSalvos.Cpf) cpf.value = formatarCpf(dadosSalvos.Cpf);
-});
+function salvarRascunho() {
+  const dadosAtuais = JSON.parse(sessionStorage.getItem("dadosCadastroCliente") || "{}");
+  sessionStorage.setItem("dadosCadastroCliente", JSON.stringify({
+    ...dadosAtuais,
+    Nome: nomeCompleto.value,
+    Cpf: cpf.value,
+  }));
+}
+
+const dadosSalvos = JSON.parse(sessionStorage.getItem("dadosCadastroCliente") || "{}");
+nomeCompleto.value = dadosSalvos.Nome || "";
+cpf.value = dadosSalvos.Cpf ? formatarCpf(dadosSalvos.Cpf) : "";
+nomeCompleto.addEventListener("input", salvarRascunho);
 
 btnAvancar.addEventListener("click", function () {
   limparErro();
