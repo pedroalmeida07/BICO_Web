@@ -165,7 +165,7 @@ async function loadProviders(term = "") {
   resultsTitle.textContent = term ? "Resultados da busca" : "Melhor Avaliados";
 
   try {
-    const prestadores = await api.buscarPrestadores(currentToken, { termo: term, limite: 20 });
+    const prestadores = await api.buscarPrestadores(currentToken, { termo: term, limite: 9 });
     if (!Array.isArray(prestadores)) {
       throw new Error("A API retornou uma lista de prestadores inválida.");
     }
