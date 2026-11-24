@@ -20,22 +20,6 @@
       <img src="../Icones/bico_logo.png" alt="Logo BICO" class="img-logo">
     </a>
 
-    <!-- CARDS DE ESTATÍSTICAS NO CABEÇALHO -->
-    <div class="header-stats">
-      <div class="stat-card">
-        <span class="stat-number">5</span>
-        <span class="stat-label">Pendentes</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-number">4,7</span>
-        <span class="stat-label">Avaliação</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-number">367</span>
-        <span class="stat-label">Concluídos</span>
-      </div>
-    </div>
-
     <!-- MENU DE NAVEGAÇÃO -->
     <nav class="header-nav">
       <a href="#" class="nav-link active">Início</a>
@@ -62,80 +46,14 @@
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="content-area">
 
-      <!-- SEÇÃO: PRÓXIMOS SERVIÇOS -->
-      <section class="section">
-        <h2 class="section-title">Próximos Serviços <object type="image/svg+xml" data="../Icones/ic_home.xml"></object></h2>
-
-        <div class="cards-grid">
-          
-          <!-- CARD DE SERVIÇO 1 -->
-          <div class="service-card">
-            <!-- COLOQUE AQUI A FOTO DO CLIENTE 1 -->
-            <img src="../Icones/Wellington_Matos.jpeg" alt="Ednaldo Pereira" class="client-avatar">
-            
-            <div class="service-info">
-              <div class="service-header-row">
-                <h3 class="client-name">Ednaldo Pereira</h3>
-                <span class="service-time">
-                  <!-- COLOQUE AQUI O ÍCONE DE RELÓGIO (OPCIONAL) OU MANTENHA SÓ O TEXTO/ÍCONE -->
-                  <img src="../Icones/ClockLaranja.png" alt="Horário" class="inline-icon">
-                  06/07, 06:07
-                </span>
-              </div>
-              
-              <p class="service-type">Reparo de disjuntor</p>
-              
-              <div class="service-footer-row">
-                <span class="service-location">
-                  <!-- COLOQUE AQUI O ÍCONE DE LOCALIZAÇÃO (PIN) -->
-                  <img src="../Icones/PinLaranja.png" alt="Local" class="inline-icon">
-                  José de Anchieta - Serra
-                </span>
-                <button class="btn-concluir">Concluir</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- CARD DE SERVIÇO 2 -->
-          <div class="service-card">
-            <!-- COLOQUE AQUI A FOTO DA CLIENTE 2 -->
-            <img src="../Icones/Wellington_Matos.jpeg" alt="Vânia Silva" class="client-avatar">
-            
-            <div class="service-info">
-              <div class="service-header-row">
-                <h3 class="client-name">Vânia Silva</h3>
-                <span class="service-time">
-                  <!-- COLOQUE AQUI O ÍCONE DE RELÓGIO -->
-                  <img src="../Icones/ClockLaranja.png" alt="Horário" class="inline-icon">
-                  12/07, 12:00
-                </span>
-              </div>
-              
-              <p class="service-type">Instalação de placas solares</p>
-              
-              <div class="service-footer-row">
-                <span class="service-location">
-                  <!-- COLOQUE AQUI O ÍCONE DE LOCALIZAÇÃO (PIN) -->
-                  <img src="../Icones/PinLaranja.png" alt="Local" class="inline-icon">
-                  Morada de Laranjeiras - Serra
-                </span>
-              </div>
-            </div>
-          </div>
-
+      <section class="account-rating" aria-label="Avaliações da conta">
+        <div class="account-rating-card">
+          <span class="account-rating-label">Nota Média</span>
+          <span class="account-rating-value" id="providerAverageRating">—</span>
         </div>
-      </section>
-
-      <!-- SEÇÃO: AÇÕES RÁPIDAS -->
-      <section class="section">
-        <h2 class="section-title">Ações Rápidas</h2>
-
-        <div class="quick-actions-grid">
-          <div class="action-card">
-            <!-- COLOQUE AQUI O ÍCONE DE AGENDA/CALENDÁRIO -->
-            <img src="../Icones/CalendarioLaranja.png" alt="Agenda" class="action-icon">
-            <span class="action-text">Agenda</span>
-          </div>
+        <div class="account-rating-card">
+          <span class="account-rating-label">Total de Avaliações</span>
+          <span class="account-review-count" id="providerReviewCount">—</span>
         </div>
       </section>
 
@@ -150,6 +68,8 @@
     const fallbackAvatar = "../Icones/bico_icone.png";
     const avatar = document.querySelector("#providerHeaderAvatar");
     const name = document.querySelector("#providerHeaderName");
+    const averageRating = document.querySelector("#providerAverageRating");
+    const reviewCount = document.querySelector("#providerReviewCount");
 
     avatar.addEventListener("error", () => {
       if (!avatar.dataset.fallbackApplied) {
@@ -167,12 +87,19 @@
         const token = await user.getIdToken();
         const profile = await api.buscarPrestador(token);
         const profileName = profile?.nome || profile?.username || "Prestador";
+        const rating = Number(profile?.notaMedia);
+        const reviews = Array.isArray(profile?.avaliacoes) ? profile.avaliacoes : [];
         name.textContent = profileName;
         avatar.alt = `Foto de ${profileName}`;
         avatar.src = profile?.fotoPerfil || profile?.fotoPaginaPerfil || fallbackAvatar;
-      } catch (_) {
+        averageRating.textContent = `${Number.isFinite(rating) ? rating.toFixed(1) : "0.0"} ★`;
+        reviewCount.textContent = String(reviews.length);
+      } catch (error) {
         name.textContent = "Prestador";
         avatar.src = fallbackAvatar;
+        averageRating.textContent = "—";
+        reviewCount.textContent = "—";
+        console.error("Não foi possível carregar os dados do prestador.", error);
       }
     });
   </script>

@@ -29,34 +29,6 @@ body {
   object-fit: contain;
 }
 
-/* CARDS NO CABEÇALHO */
-.header-stats {
-  display: flex;
-  gap: 15px;
-}
-
-.stat-card {
-  background-color: #ffffff;
-  padding: 8px 20px;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 110px;
-}
-
-.stat-number {
-  color: #f39a36;
-  font-weight: 700;
-  font-size: 1.25rem;
-}
-
-.stat-label {
-  color: #202b3d;
-  font-size: 0.85rem;
-  font-weight: 600;
-}
-
 /* LINKS DO HEADER */
 .header-nav {
   display: flex;
@@ -143,148 +115,73 @@ body {
   padding: 40px 50px;
 }
 
-.section {
-  margin-bottom: 40px;
+.account-rating {
+  display: grid;
+  gap: 12px;
+  width: min(100%, 420px);
 }
 
-.section-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #1e293b;
-  margin-bottom: 20px;
-}
-
-/* GRIDS E CARDS DE SERVIÇOS */
-.cards-grid {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.service-card {
-  background-color: #ffffff;
+.account-rating-card {
+  background-color: #202b3d;
   border-radius: 12px;
-  padding: 16px;
+  padding: 16px 18px;
   display: flex;
-  gap: 16px;
-  flex: 1;
-  min-width: 360px;
-  max-width: 480px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  border: 1px solid #e2e8f0;
-}
-
-.client-avatar {
-  width: 85px;
-  height: 85px;
-  border-radius: 10px;
-  object-fit: cover;
-}
-
-.service-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.service-header-row {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  min-height: 56px;
 }
 
-.client-name {
+.account-rating-label,
+.account-rating-value,
+.account-review-count {
   font-size: 1rem;
-  font-weight: 700;
-  color: #1e293b;
-}
-
-.service-time {
-  color: #f39a36;
-  font-size: 0.8rem;
   font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 4px;
 }
 
-.inline-icon {
-  width: 14px;
-  height: 14px;
-  object-fit: contain;
+.account-rating-label,
+.account-review-count {
+  color: #ffffff;
 }
 
-.service-type {
-  font-size: 0.85rem;
-  color: #64748b;
-  margin-top: 2px;
-}
-
-.service-footer-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 12px;
-}
-
-.service-location {
-  font-size: 0.78rem;
-  color: #94a3b8;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.btn-concluir {
-  background-color: #fde8d0;
+.account-rating-value {
   color: #f39a36;
-  border: none;
-  padding: 4px 14px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: opacity 0.2s;
 }
 
-.btn-concluir:hover {
-  opacity: 0.85;
-}
+@media (max-width: 600px) {
+  .header {
+    padding: 12px 16px;
+  }
 
-/* AÇÕES RÁPIDAS */
-.quick-actions-grid {
-  display: flex;
-  gap: 20px;
-}
+  .header-nav,
+  .sidebar {
+    display: none;
+  }
 
-.action-card {
-  background-color: #ffffff;
-  border-radius: 12px;
-  padding: 20px 30px;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  width: fit-content;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
+  .header .header-logo {
+    display: none;
+  }
 
-.action-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
+  .header-profile {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
 
-.action-icon {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-}
+  .profile-name {
+    order: -1;
+    font-size: 1.2rem;
+  }
 
-.action-text {
-  font-weight: 700;
-  color: #1e293b;
-  font-size: 1rem;
+  .profile-avatar {
+    width: 60px;
+    height: 60px;
+  }
+
+  .content-area {
+    padding: 27px 14px;
+  }
+
+  .account-rating {
+    width: 100%;
+  }
 }
