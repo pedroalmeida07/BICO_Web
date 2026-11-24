@@ -1,9 +1,46 @@
+import { cpfValido } from "../Utils/cpf.js";
+
 // Elementos da tela
 const btnAvancar = document.getElementById("btnAvancar");
 const btnVoltar = document.getElementById("btnVoltar");
 const nomeCompleto = document.getElementById("nomeCompleto");
 const cpf = document.getElementById("cpf");
 const mensagemErro = document.getElementById("mensagemErro");
+
+function formatarCpf(valor) {
+  const digitos = valor.replace(/\D/g, "").slice(0, 11);
+
+  if (digitos.length > 9) {
+    return `${digitos.slice(0, 3)}.${digitos.slice(3, 6)}.${digitos.slice(6, 9)}-${digitos.slice(9)}`;
+  }
+  if (digitos.length > 6) {
+    return `${digitos.slice(0, 3)}.${digitos.slice(3, 6)}.${digitos.slice(6)}`;
+  }
+  if (digitos.length > 3) {
+    return `${digitos.slice(0, 3)}.${digitos.slice(3)}`;
+  }
+  return digitos;
+}
+
+cpf.addEventListener("input", function () {
+  const cursor = cpf.selectionStart === null ? cpf.value.length : cpf.selectionStart;
+  const digitosAntesCursor = cpf.value.slice(0, cursor).replace(/\D/g, "").length;
+  const valorFormatado = formatarCpf(cpf.value);
+  cpf.value = valorFormatado;
+
+  let novaPosicao = 0;
+  let digitosContados = 0;
+  while (novaPosicao < valorFormatado.length && digitosContados < digitosAntesCursor) {
+    if (/\d/.test(valorFormatado[novaPosicao])) {
+      digitosContados++;
+    }
+    novaPosicao++;
+  }
+  while (novaPosicao < valorFormatado.length && !/\d/.test(valorFormatado[novaPosicao])) {
+    novaPosicao++;
+  }
+  cpf.setSelectionRange(novaPosicao, novaPosicao);
+});
 
 function mostrarErro(texto) {
   if (mensagemErro) {
@@ -24,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const dadosSalvos = JSON.parse(sessionStorage.getItem("dadosCadastroCliente") || "{}");
   
   if (dadosSalvos.Nome) nomeCompleto.value = dadosSalvos.Nome;
-  if (dadosSalvos.Cpf) cpf.value = dadosSalvos.Cpf;
+  if (dadosSalvos.Cpf) cpf.value = formatarCpf(dadosSalvos.Cpf);
 });
 
 btnAvancar.addEventListener("click", function () {
@@ -37,6 +74,10 @@ btnAvancar.addEventListener("click", function () {
   }
   if (!cpf.value.trim()) {
     mostrarErro("Insira seu CPF!");
+    return;
+  }
+  if (!cpfValido(cpf.value)) {
+    mostrarErro("CPF inválido. Verifique os números digitados.");
     return;
   }
 

@@ -114,6 +114,7 @@ body {
 
 .custom-eye-toggle {
     border-color: var(--cor-borda-input);
+    cursor: pointer;
 }
 
 /* ==========================================================================
