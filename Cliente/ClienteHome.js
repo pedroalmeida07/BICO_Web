@@ -4,6 +4,7 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/f
 
 const searchForm = document.querySelector("#providerSearchForm");
 const searchInput = document.querySelector("#service-search");
+const initialSearchTerm = new URLSearchParams(window.location.search).get("termo")?.trim() || "";
 const providerResults = document.querySelector("#providerResults");
 const favoriteResults = document.querySelector("#favoriteResults");
 const resultsTitle = document.querySelector("#provider-results-title");
@@ -212,11 +213,12 @@ async function loadFavorites() {
 
 searchForm.addEventListener("submit", async (event) => {
   event.preventDefault();
+  const term = searchInput.value.trim();
   if (!currentToken) {
     showMessage(providerResults, "Entre na sua conta para pesquisar prestadores.");
     return;
   }
-  await loadProviders(searchInput.value.trim());
+  await loadProviders(term);
 });
 
 onAuthStateChanged(auth, async (usuario) => {
@@ -228,7 +230,8 @@ onAuthStateChanged(auth, async (usuario) => {
 
   try {
     currentToken = await usuario.getIdToken();
-    await Promise.all([loadProviders(), loadFavorites()]);
+    searchInput.value = initialSearchTerm;
+    await Promise.all([loadProviders(initialSearchTerm), loadFavorites()]);
   } catch (error) {
     showMessage(providerResults, error.message || "Não foi possível carregar os dados da conta.");
     showMessage(favoriteResults, "Não foi possível carregar os favoritos.");

@@ -124,18 +124,31 @@
         /* BOTÃO SALVAR */
         .btn-salvar-container {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            gap: 12px;
             margin-top: 15px;
         }
 
-        .btn-salvar {
+        .btn-salvar,
+        .btn-logout {
             background-color: #233044;
             color: #fff;
             border: none;
-            padding: 10px 45px;
+            padding: 10px 12px;
+            width: 140px;
             border-radius: 14px;
             font-size: 16px;
             cursor: pointer;
+        }
+
+        .btn-logout {
+            background-color: #dc3545;
+        }
+
+        .btn-salvar:disabled,
+        .btn-logout:disabled {
+            cursor: not-allowed;
+            opacity: 0.65;
         }
 
         #profileMessage {
@@ -154,8 +167,8 @@
             <img src="../Icones/bico_logo.png" alt="BICO" class="logo-nome">
         </a>
 
-        <form class="search-form" role="search">
-            <input type="search" placeholder="Pesquisar um serviço ou prestador">
+        <form class="search-form" role="search" action="ClienteHome.html" method="get">
+            <input type="search" name="termo" placeholder="Pesquisar um serviço ou prestador">
             <button type="submit"><i class="bi bi-search"></i></button>
         </form>
 
@@ -172,9 +185,9 @@
 
     <div class="main-layout">
         <aside class="sidebar" aria-label="Atalhos">
-            <a href="ClienteHome.html" class="sidebar-icon active" title="Página inicial" aria-label="Página inicial"><img src="../Icones/HomeLaranja.png" alt="Página Inicial"></a>
-            <a href="#perfil" class="sidebar-icon" title="Editar perfil" aria-label="Editar perfil"><img src="../Icones/UserPreto.png" alt="Editar Perfil"></a>
-            <a href="#favoritos" class="sidebar-icon" title="Favoritos" aria-label="Favoritos"><img src="../Icones/StarPreto.png" alt="Favoritos"></a>
+            <a href="ClienteHome.html" class="sidebar-icon" title="Página inicial" aria-label="Página inicial"><img src="../Icones/HomeLaranja.png" alt="Página Inicial"></a>
+            <a href="#perfil" class="sidebar-icon active" title="Editar perfil" aria-label="Editar perfil"><img src="../Icones/UserPreto.png" alt="Editar Perfil"></a>
+            <a href="ClienteHome.html#favoritos" class="sidebar-icon" title="Favoritos" aria-label="Favoritos"><img src="../Icones/StarPreto.png" alt="Favoritos"></a>
         </aside>
 
         <!-- Conteúdo Principal -->
@@ -237,6 +250,7 @@
 
                     <div class="btn-salvar-container">
                         <button type="submit" class="btn-salvar" disabled>Salvar</button>
+                        <button type="button" class="btn-logout" id="logoutButton">Sair</button>
                     </div>
                 </form>
 

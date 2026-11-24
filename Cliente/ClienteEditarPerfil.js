@@ -1,9 +1,10 @@
 import { api } from "../API/apiService.js";
 import { auth } from "../API/firebase.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
 const form = document.querySelector(".edit-form");
 const saveButton = form.querySelector(".btn-salvar");
+const logoutButton = document.querySelector("#logoutButton");
 const message = document.querySelector("#profileMessage");
 const fields = {
   nome: document.querySelector("#nome"),
@@ -130,6 +131,18 @@ form.addEventListener("submit", async (event) => {
     return;
   }
   await saveProfile(buildUpdatedProfile());
+});
+
+logoutButton.addEventListener("click", async () => {
+  logoutButton.disabled = true;
+  showMessage("Saindo da conta...");
+  try {
+    await signOut(auth);
+    window.location.href = "../Login/Login.html";
+  } catch (error) {
+    showMessage(error.message || "Não foi possível sair da conta.", true);
+    logoutButton.disabled = false;
+  }
 });
 
 photoButton.addEventListener("click", () => photoInput.click());
