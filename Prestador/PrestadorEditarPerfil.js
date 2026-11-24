@@ -1,6 +1,6 @@
 import { api } from "../API/apiService.js";
 import { auth } from "../API/firebase.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
 const profileTitle = document.querySelector("#profileTitle");
 const profileAbout = document.querySelector("#profileAbout");
@@ -21,6 +21,7 @@ const profilePhotoInput = document.querySelector("#profilePhotoInput");
 const galleryPhotoInput = document.querySelector("#galleryPhotoInput");
 const headerAvatar = document.querySelector("#providerHeaderAvatar");
 const headerName = document.querySelector("#providerHeaderName");
+const logoutButton = document.querySelector("#logoutButton");
 const editButtons = document.querySelectorAll("[data-edit-field], [data-edit-photo]");
 const saveButton = editForm.querySelector("button[type='submit']");
 const toast = document.querySelector("#toast");
@@ -37,6 +38,18 @@ headerAvatar.addEventListener("error", () => {
   if (!headerAvatar.dataset.fallbackApplied) {
     headerAvatar.dataset.fallbackApplied = "true";
     headerAvatar.src = fallbackAvatar;
+  }
+});
+
+logoutButton.addEventListener("click", async () => {
+  logoutButton.disabled = true;
+  showToast("Saindo da conta...");
+  try {
+    await signOut(auth);
+    window.location.href = "../Login/Login.html";
+  } catch (error) {
+    showToast(error.message || "Não foi possível sair da conta.");
+    logoutButton.disabled = false;
   }
 });
 
