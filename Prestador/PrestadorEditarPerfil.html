@@ -61,7 +61,7 @@
             content: attr(data-placeholder);
         }
     </style>
-    <link rel="stylesheet" href="/Cliente/Cliente.css">
+    <link rel="stylesheet" href="Prestador.css">
     <link rel="stylesheet" href="../Fonts/Design.css">
 </head>
 <body class="h-screen flex flex-col overflow-hidden text-slate-800">
@@ -70,38 +70,34 @@
 
         <!-- Top Navbar -->
         <header class="header">
-        <a class="header-logo" href="PrestadorHome.html" aria-label="BICO - início">
-            <img src="../Icones/bico_tucan.png" alt="" class="logo-tucano">
-            <img src="../Icones/bico_logo.png" alt="BICO" class="logo-nome">
-        </a>
+            <a class="header-logo" href="PrestadorHome.html" aria-label="BICO - início">
+                <img src="../Icones/bico_tucan.png" alt="Logo BICO" class="img-logo">
+                <img src="../Icones/bico_logo.png" alt="Logo BICO" class="img-logo">
+            </a>
 
-        <form class="search-form" role="search">
-            <input type="search" placeholder="Pesquisar um serviço ou prestador">
-            <button type="submit"><i class="bi bi-search"></i></button>
-        </form>
+            <nav class="header-nav">
+                <a href="#" class="nav-link active">Início</a>
+                <a href="#" class="nav-link">Mensagens</a>
+            </nav>
 
-        <nav class="header-nav">
-            <a href="ClienteHome.html" class="nav-link">Início</a>
-            <a href="#mensagens" class="nav-link">Mensagens</a>
-        </nav>
-
-        <a class="header-profile" href="PrestadorEditarPerfil.html">
-            <div class="profile-avatar-icon">
-                <i class="bi bi-person-fill"></i>
-            </div>
-            <span class="profile-name">Kleber Nunes</span>
-        </a>
-    </header>
+            <a class="header-profile" href="PrestadorEditarPerfil.html" id="providerHeaderProfile">
+                <img src="../Icones/bico_icone.png" alt="Foto do prestador" class="profile-avatar" id="providerHeaderAvatar">
+                <span class="profile-name" id="providerHeaderName">Prestador</span>
+            </a>
+        </header>
 
         <!-- Main Body Area with Sidebar and Scrollable Content -->
         <div class="flex flex-1 min-h-0 relative bg-white">
             
             <!-- Left Sidebar Navigation -->
             <aside class="sidebar" aria-label="Atalhos">
-            <a href="PrestadorHome.html" class="sidebar-icon active" title="Página inicial" aria-label="Página inicial"><img src="../Icones/HomeLaranja.png" alt="Página Inicial"></a>
-            <a href="ClienteEditarPerfil.html" class="sidebar-icon" title="Editar perfil" aria-label="Editar perfil"><img src="../Icones/UserPreto.png" alt="Editar Perfil"></a>
-            <a href="#favoritos" class="sidebar-icon" title="Favoritos" aria-label="Favoritos"><img src="../Icones/StarPreto.png" alt="Favoritos"></a>
-        </aside>
+                <a href="PrestadorHome.html" class="sidebar-icon" title="Página inicial" aria-label="Página inicial">
+                    <img src="../Icones/HomeLaranja.png" alt="Página Inicial">
+                </a>
+                <a href="PrestadorEditarPerfil.html" class="sidebar-icon active" title="Editar perfil" aria-label="Editar perfil" aria-current="page">
+                    <img src="../Icones/UserPreto.png" alt="Editar Perfil">
+                </a>
+            </aside>
 
             <!-- Main Scroll View Content -->
             <main class="flex-1 min-h-0 px-8 py-6 overflow-y-auto">
@@ -161,8 +157,8 @@
                                 <img src="../Icones/pencil-svgrepo-com.svg" alt="">
                             </button>
                         </h2>
-                        <div class="flex items-start space-x-2">
-                            <i class="fa-solid fa-location-dot text-amber-500 text-lg mt-0.5"></i>
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-location-dot text-amber-500 text-lg"></i>
                             <div>
                                 <p id="profileLocation" class="text-xs font-bold text-slate-700">Local de atuação não informado.</p>
                             </div>

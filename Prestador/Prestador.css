@@ -113,28 +113,31 @@ body {
 .content-area {
   flex: 1;
   padding: 40px 50px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .account-rating {
   display: grid;
-  gap: 12px;
-  width: min(100%, 420px);
+  gap: 16px;
+  width: min(100%, 800px);
 }
 
 .account-rating-card {
   background-color: #202b3d;
   border-radius: 12px;
-  padding: 16px 18px;
+  padding: 20px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 56px;
+  min-height: 68px;
 }
 
 .account-rating-label,
 .account-rating-value,
 .account-review-count {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 600;
 }
 

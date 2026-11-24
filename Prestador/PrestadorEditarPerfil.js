@@ -19,6 +19,8 @@ const editInput = document.querySelector("#profileEditInput");
 const editHint = document.querySelector("#profileEditHint");
 const profilePhotoInput = document.querySelector("#profilePhotoInput");
 const galleryPhotoInput = document.querySelector("#galleryPhotoInput");
+const headerAvatar = document.querySelector("#providerHeaderAvatar");
+const headerName = document.querySelector("#providerHeaderName");
 const editButtons = document.querySelectorAll("[data-edit-field], [data-edit-photo]");
 const saveButton = editForm.querySelector("button[type='submit']");
 const toast = document.querySelector("#toast");
@@ -29,6 +31,14 @@ let currentUser = null;
 let editingField = "";
 let toastTimeout;
 let saving = false;
+const fallbackAvatar = "../Icones/bico_icone.png";
+
+headerAvatar.addEventListener("error", () => {
+  if (!headerAvatar.dataset.fallbackApplied) {
+    headerAvatar.dataset.fallbackApplied = "true";
+    headerAvatar.src = fallbackAvatar;
+  }
+});
 
 function showToast(message) {
   toastMessage.textContent = message;
@@ -55,8 +65,12 @@ function renderProfile() {
   const galleryPhotos = Array.isArray(profile.fotosServicos) ? profile.fotosServicos : [];
   const profileName = profile.nome || "";
   const profileTitleText = [profileName, services[0]].filter(Boolean).join(" - ");
+  const headerProfileName = profileName || profile.username || "Prestador";
 
   profileTitle.textContent = profileTitleText || "Perfil do prestador";
+  headerName.textContent = headerProfileName;
+  headerAvatar.alt = `Foto de ${headerProfileName}`;
+  headerAvatar.src = profile.fotoPerfil || profile.fotoPaginaPerfil || fallbackAvatar;
   profileAbout.textContent = profile.sobre || "";
   profileAbout.dataset.empty = String(!profile.sobre);
   profileLocation.textContent = profile.localAtuacao || "Local de atuação não informado.";
@@ -68,8 +82,7 @@ function renderProfile() {
   }));
   servicePlaceholder.hidden = services.length > 0;
 
-  const fallbackPhoto = "../Icones/bico_icone.png";
-  const profilePhotoUrl = profile.fotoPaginaPerfil || profile.fotoPerfil || fallbackPhoto;
+  const profilePhotoUrl = profile.fotoPaginaPerfil || profile.fotoPerfil || fallbackAvatar;
   profilePhoto.src = profilePhotoUrl;
   profilePhoto.alt = profileName ? `Foto de ${profileName}` : "Foto do prestador";
   profilePhoto.classList.remove("hidden");
@@ -79,7 +92,7 @@ function renderProfile() {
       return;
     }
     profilePhoto.dataset.fallbackApplied = "true";
-    profilePhoto.src = fallbackPhoto;
+    profilePhoto.src = fallbackAvatar;
   });
 
   photoGallery.replaceChildren(...galleryPhotos.map((url, index) => {
